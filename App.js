@@ -1,21 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect, useContext, createContext } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import firebase from './Firebase/fire';
+import Login from './Screens/Login';
+import Signup from './Screens/Signup';
+import DrawerNavigator from './navigator/MainNavigator';
+import { LanguageContext } from './LanguageContext';
+
+import i18n from 'i18n-js';
+import * as Localization from 'expo-localization';
+
+const Stack = createStackNavigator();
+
+export default AppContainer = () => {
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  const [context, setContext] = useState('en');
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <LanguageContext.Provider value={{context, setContext}}>
+        {
+          user ?
+            <Stack.Navigator initialRouteName="DrawerNavigator">
+              <Stack.Screen options={{ headerShown: false }} name="DrawerNavigator" component={DrawerNavigator} />
+            </Stack.Navigator>
+            :
+            <Stack.Navigator initialRouteName="Login" >
+              <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+              <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
+            </Stack.Navigator>
+        }
+      </LanguageContext.Provider>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
