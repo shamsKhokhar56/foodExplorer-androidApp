@@ -2,7 +2,10 @@ import React, { useContext, useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { LanguageContext } from '../LanguageContext';
 
-import i18n from 'i18n-js';
+import { AntDesign } from '@expo/vector-icons';
+
+import Colors from '../constants/Colors';
+import LanguageText from '../components/LanguageText';
 
 const Languages = ({ navigation }) => {
     const { context, setContext } = useContext(LanguageContext)
@@ -18,7 +21,15 @@ const Languages = ({ navigation }) => {
         {
             code: 'fr',
             language: 'French'
-        }
+        },
+        {
+            code: 'ge',
+            language: 'German'
+        },
+        {
+            code: 'sp',
+            language: 'Spanish'
+        },
     ];
 
     const languageHandler = (languageCode) => {
@@ -28,9 +39,7 @@ const Languages = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.headingView}>
-                <Text style={styles.headingText}>
-                    {i18n.t('selectLanguage')}
-                </Text>
+                <LanguageText styles={styles.headingText} value={'selectLanguage'} />
             </View>
             {
                 Languages.map(item => {
@@ -41,9 +50,23 @@ const Languages = ({ navigation }) => {
                                 style={styles.buttonStyles}
                                 onPress={() => languageHandler(item.code)}
                             >
-                                <Text style={styles.buttonText}>
-                                    {item.language}
-                                </Text>
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+                                    <Text style={styles.buttonText}>
+                                        {item.language}
+                                    </Text>
+                                    <Text>
+                                        {
+                                            item.code === context ?
+                                                <AntDesign name="check" size={40} color={Colors.primary} />
+                                                :
+                                                (
+                                                    <View>
+
+                                                    </View>
+                                                )
+                                        }
+                                    </Text>
+                                </View>
                             </TouchableHighlight>
                         </View>
                     )
@@ -70,7 +93,6 @@ const styles = StyleSheet.create({
         height: 70,
         borderBottomColor: 'grey',
         borderBottomWidth: 2,
-        // margin: 5
     },
     buttonStyles: {
     },

@@ -5,7 +5,11 @@ import dietPlans from '../data/DietPlans';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
 
+
+import LanguageText from '../components/LanguageText';
+
 const DietPlans = ({ navigation }) => {
+
     return (
         <View style={styles.screen}>
             <View style={styles.screenInner}>
@@ -13,12 +17,14 @@ const DietPlans = ({ navigation }) => {
                     return (
                         <Card style={styles.cardStyles} key={item.id}>
                             <TouchableHighlight
+                                underlayColor='none'
                                 onPress={() => {
                                     navigation.navigate('DietPlansDetails', {
-                                        name: item.name
+                                        id: item.id
                                     })
                                 }}>
                                 <ImageBackground style={styles.imageStyle} resizeMode='contain' source={item.imageSource}>
+                                    <LanguageText styles={styles.innerTextStyles} value={item.name} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>

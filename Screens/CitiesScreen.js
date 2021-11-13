@@ -5,13 +5,13 @@ import Colors from '../constants/Colors'
 import Card from '../components/Card'
 import Cities from '../data/CitiesData'
 
+import LanguageText from '../components/LanguageText'
+
 const CitiesScreen = ({ navigation }) => {
     return (
         <View style={styles.screen}>
             <View style={styles.headingView}>
-                <Text style={styles.headingText}>
-                    We are in following Cities
-                </Text>
+                <LanguageText styles={styles.headingText} value={'availableCities'} />
             </View>
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -23,7 +23,7 @@ const CitiesScreen = ({ navigation }) => {
                             <Card style={styles.cardStyles} >
                                 <TouchableHighlight onPress={() => {
                                     navigation.navigate('RestaurantScreenFromCities',
-                                        {cityName: item.cityName}
+                                        { cityName: item.cityName }
                                     )
                                 }}>
                                     <ImageBackground style={styles.imageStyle} source={item.image}>

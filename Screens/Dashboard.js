@@ -1,21 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, ImageBackground, TouchableHighlight, ScrollView, Dimensions } from 'react-native';
 import { LanguageContext } from '../LanguageContext';
-
-import translations from '../services/translations';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
-
-import i18n from 'i18n-js';
+import LanguageText from '../components/LanguageText';
 
 const Dashboard = ({ navigation }) => {
-    const {context, setContext} = useContext(LanguageContext)
-    i18n.locale = context
-    i18n.fallbacks = true;
-    i18n.translations = translations
     return (
         <View style={styles.screen}>
             <View style={styles.dashboardItems}>
@@ -23,12 +16,10 @@ const Dashboard = ({ navigation }) => {
                     <View style={styles.dashboardItemsViewLower}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('RestaurantScreen',
-                                { city: 'islamabad' }
+                                { city: 'Islamabad' }
                             )}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/Restaurant1.jpg')}>
-                                    <Text style={styles.textStyles}>
-                                        {i18n.t('restaurant')}
-                                    </Text>
+                                    <LanguageText styles={styles.textStyles} value={'restaurant'} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>
@@ -37,9 +28,7 @@ const Dashboard = ({ navigation }) => {
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('CitiesScreen')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/cities.jpeg')}>
-                                    <Text style={styles.textStyles}>
-                                        {i18n.t('cities')}
-                                    </Text>
+                                    <LanguageText styles={styles.textStyles} value={'cities'} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>
@@ -48,9 +37,7 @@ const Dashboard = ({ navigation }) => {
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('WorkoutMain')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/workout.jpg')}>
-                                    <Text style={styles.textStyles}>
-                                        {i18n.t('workout')}
-                                    </Text>
+                                    <LanguageText styles={styles.textStyles} value={'workout'} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>
@@ -59,9 +46,7 @@ const Dashboard = ({ navigation }) => {
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('DietPlans')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/dietPlan.jpg')}>
-                                    <Text style={styles.textStyles}>
-                                        {i18n.t('diet')}
-                                    </Text>
+                                    <LanguageText styles={styles.textStyles} value={'diet'} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>

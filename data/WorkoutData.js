@@ -1,18 +1,18 @@
 const workoutTypes = [
     {
         id: 1,
-        name: 'Home Based Workout',
+        name: 'homeBasedWorkout',
         imageSource: require('../assets/HomeWorkout1.jpg'),
 
     },
     {
         id: 2,
-        name: 'Build Muscles',
+        name: 'buildMuscles',
         imageSource: require('../assets/BuildMuscles.jpg')
     },
     {
         id: 3,
-        name: 'Lose Weight',
+        name: 'loseWeight',
         imageSource: require('../assets/WeightLose.jpg')
     },
 ]

@@ -1,15 +1,15 @@
 const building = [
     {
         workoutId: '0',
-        name: 'Skinny Legs',
+        name: 'skinnyLegs',
         image: require('../assets/skinnyLegs.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Squat Jumps',
+                catName: 'squatJumps',
                 circuit: {
-                    1: 'Circuit 1: 15 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 15 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/jumpSquat.jpg'),
                 image2: '2',
@@ -18,10 +18,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Smith Machine Calf Raise',
+                catName: 'smithMachineCalfRaise',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/smithMachineCalfRaise.jpg'),
                 image2: '2',
@@ -30,10 +30,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Split Squats',
+                catName: 'splitSquats',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/splitSquat.jpg'),
                 image2: '2',
@@ -42,10 +42,10 @@ const building = [
             },
             {
                 id: '4',
-                catName: 'Lunges',
+                catName: 'lunges',
                 circuit: {
-                    1: 'Circuit 1: 15 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 15 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/lunges.jpg'),
                 image2: '2',
@@ -56,15 +56,15 @@ const building = [
     },
     {
         workoutId: '1',
-        name: 'Shoulders',
+        name: 'shoulders',
         image: require('../assets/shoulders.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Barbell Shoulder Press',
+                catName: 'barbellShoulderPress',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/shoulderBarbellPress.jpg'),
                 image2: '2',
@@ -73,10 +73,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Shrugs',
+                catName: 'shrugs',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/shrugs.jpg'),
                 image2: '2',
@@ -85,10 +85,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Lateral Raise',
+                catName: 'laiteralRaise',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/lateralRaise.jpg'),
                 image2: '2',
@@ -99,15 +99,15 @@ const building = [
     },
     {
         workoutId: '2',
-        name: 'Biceps',
+        name: 'biceps',
         image: require('../assets/biceps.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Pull Ups',
+                catName: 'pullups',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 8 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 8 Reps',
                 },
                 image1: require('../assets/pullUps.jpg'),
                 image2: '2',
@@ -116,10 +116,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Hammer Curls',
+                catName: 'hammerCurls',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -128,10 +128,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Barbell Curls',
+                catName: 'barbellCurls',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -140,10 +140,10 @@ const building = [
             },
             {
                 id: '4',
-                catName: 'Bar Preacher Curls',
+                catName: 'barPreacherCurls',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -154,15 +154,15 @@ const building = [
     },
     {
         workoutId: '3',
-        name: 'Triceps',
+        name: 'triceps',
         image: require('../assets/triceps.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Lying Triceps Extension',
+                catName: 'lyingTricepsExtension',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -171,10 +171,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Bench Dips',
+                catName: 'benchDips',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 14 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 14 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -183,10 +183,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Close Grip EZ Bar Bench Press',
+                catName: 'closeGripBar',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -195,10 +195,10 @@ const building = [
             },
             {
                 id: '4',
-                catName: 'Tricep Dips',
+                catName: 'tricepsDips',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 14 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 14 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -209,15 +209,15 @@ const building = [
     },
     {
         workoutId: '4',
-        name: 'Abs',
+        name: 'abs',
         image: require('../assets/abs.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Swiss Ball Crunches',
+                catName: 'swissBallCrunches',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -226,10 +226,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Plank',
+                catName: 'plank',
                 circuit: {
-                    1: 'Circuit 1: Hold the Position for 1 min',
-                    2: 'Circuit 2: Hold the Position for 1 min',
+                    1: '1: Hold the Position for 1 min',
+                    2: '2: Hold the Position for 1 min',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -238,10 +238,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Bicycle Crunches',
+                catName: 'bicycleCrunches',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 12 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -250,10 +250,10 @@ const building = [
             },
             {
                 id: '4',
-                catName: 'Lying Leg Raise',
+                catName: 'lyingLegRaise',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -262,10 +262,10 @@ const building = [
             },
             {
                 id: '5',
-                catName: 'Declie Oblique Crunches',
+                catName: 'declieObliqueCrunches',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 14 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 14 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -276,15 +276,15 @@ const building = [
     },
     {
         workoutId: '5',
-        name: 'Back',
+        name: 'back',
         image: require('../assets/back.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Dumbell Bent Over',
+                catName: 'dumbellBentOver',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -293,10 +293,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'DeadLift',
+                catName: 'deadLift',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -305,10 +305,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Hyper Extension',
+                catName: 'hyperExtension',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -319,15 +319,15 @@ const building = [
     },
     {
         workoutId: '6',
-        name: 'Chest',
+        name: 'chest',
         image: require('../assets/chest.jpg'),
         category: [
             {
                 id: '1',
-                catName: 'Plain Bench Barbell Press',
+                catName: 'plainBenchBarbellPress',
                 circuit: {
-                    1: 'Circuit 1: 14 Reps',
-                    2: 'Circuit 2: 10 Reps',
+                    1: '1: 14 Reps',
+                    2: '2: 10 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -336,10 +336,10 @@ const building = [
             },
             {
                 id: '2',
-                catName: 'Incline Bench Dumbell Press',
+                catName: 'inclineBenchDumbellPress',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -348,10 +348,10 @@ const building = [
             },
             {
                 id: '3',
-                catName: 'Push Ups',
+                catName: 'pushUps',
                 circuit: {
-                    1: 'Circuit 1: 15 Reps',
-                    2: 'Circuit 2: 12 Reps',
+                    1: '1: 15 Reps',
+                    2: '2: 12 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -360,10 +360,10 @@ const building = [
             },
             {
                 id: '4',
-                catName: 'Butterfly',
+                catName: 'butterfly',
                 circuit: {
-                    1: 'Circuit 1: 10 Reps',
-                    2: 'Circuit 2: 14 Reps',
+                    1: '1: 10 Reps',
+                    2: '2: 14 Reps',
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',

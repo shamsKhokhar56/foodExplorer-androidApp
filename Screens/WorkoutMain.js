@@ -6,6 +6,8 @@ import Colors from '../constants/Colors';
 
 import workoutTypes from '../data/WorkoutData';
 
+import LanguageText from '../components/LanguageText';
+
 const WorkoutMain = ({ navigation }) => {
     return (
         <View style={styles.screen}>
@@ -16,13 +18,11 @@ const WorkoutMain = ({ navigation }) => {
                             <TouchableHighlight
                                 onPress={() => {
                                     navigation.navigate('WorkoutTypes', {
-                                        workoutName: item.name
+                                        workoutId: item.id
                                     })
                                 }}>
                                 <ImageBackground style={styles.imageStyle} source={item.imageSource}>
-                                    <Text style={styles.innerTextStyles}>
-                                        {item.name}
-                                    </Text>
+                                    <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
                                 </ImageBackground>
                             </TouchableHighlight>
                         </Card>

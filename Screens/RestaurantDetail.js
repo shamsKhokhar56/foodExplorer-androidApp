@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, FlatList, TouchableHighlight, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, TouchableHighlight, Image, ScrollView, StyleSheet, Text, View, TextInput } from 'react-native';
 
 import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 
@@ -8,13 +8,18 @@ import { Entypo } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
 import Food from '../data/Food';
-import Reviews from '../data/Review';
+import PostReviewForm from './PostReviewForm';
+import DisplayReviews from '../components/DisplayReviews';
+import LanguageText from '../components/LanguageText';
 
 const RestaurantDetail = ({ navigation, route }) => {
 
     const [food, setFood] = useState(true)
     const [about, setAbout] = useState(false)
     const [showReview, setShowReview] = useState(false)
+    const [postReview, setPostReview] = useState(false)
+    const [review, setReview] = useState('')
+    const [defaultRating, setDefaultRating] = useState(0)
 
     const restId = route.params.restId
     const name = route.params.name
@@ -47,6 +52,10 @@ const RestaurantDetail = ({ navigation, route }) => {
         }
     }
 
+    const postHandler = () => {
+        //Post Review function here
+    }
+
     return (
         <ScrollView style={styles.screen}>
             <Image style={styles.imageStyles} source={{ uri: image }} />
@@ -67,36 +76,30 @@ const RestaurantDetail = ({ navigation, route }) => {
                     activeOpacity={0.4}
                     style={food ? styles.buttonStylesTrue : styles.buttonStylesFalse}
                     onPress={() => handleStates('food')}>
-                    <Text style={styles.buttonText}>
-                        Food
-                    </Text>
+                    <LanguageText styles={styles.buttonText} value={'food'} />
                 </TouchableHighlight>
                 <TouchableHighlight
                     underlayColor={'white'}
                     activeOpacity={0.4}
                     style={about ? styles.buttonStylesTrue : styles.buttonStylesFalse}
                     onPress={() => handleStates('about')}>
-                    <Text style={styles.buttonText}>
-                        About
-                    </Text>
+                    <LanguageText styles={styles.buttonText} value={'about'} />
                 </TouchableHighlight>
                 <TouchableHighlight
                     underlayColor={'white'}
                     activeOpacity={0.4}
                     style={showReview ? styles.buttonStylesTrue : styles.buttonStylesFalse}
-                    onPress={() => handleStates('review')}
-                >
-                    <Text style={styles.buttonText}>
-                        Reviews
-                    </Text>
+                    onPress={() => handleStates('review')}>
+                    <LanguageText styles={styles.buttonText} value={'reviews'} />
                 </TouchableHighlight>
             </View>
             {
                 food ? (
                     <View>
-                        <Text style={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}>
-                            Food Items:
-                        </Text>
+                        <LanguageText
+                            styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
+                            value={'foodItems'}
+                        />
                         {Food.map(item => {
                             if (item.restaurantID === restId) {
                                 return (
@@ -106,17 +109,13 @@ const RestaurantDetail = ({ navigation, route }) => {
                                         </View>
                                         <View style={styles.foodDetailsView}>
                                             <View style={styles.ratingStyles}>
-                                                <Text style={[styles.textStyles, { paddingHorizontal: 5 }]}>
-                                                    Name:
-                                                </Text>
+                                                <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'name'} />
                                                 <Text style={styles.timeTextStyles}>
                                                     {item.foodName}
                                                 </Text>
                                             </View>
                                             <View style={styles.ratingStyles}>
-                                                <Text style={[styles.textStyles, { paddingHorizontal: 5 }]}>
-                                                    Price:
-                                                </Text>
+                                                <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'price'} />
                                                 <Text style={styles.timeTextStyles}>
                                                     {item.foodPrice}
                                                 </Text>
@@ -129,51 +128,43 @@ const RestaurantDetail = ({ navigation, route }) => {
                     </View>
                 ) : showReview ? (
                     <View>
-                        <Text style={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}>
-                            Reviews:
-                        </Text>
-                        {Reviews.map(item => {
-                            if (item.restaurantID === restId) {
-                                return (
-                                    <View style={styles.reviewView} key={item.reviewID} >
-                                        <View style={styles.leftHand}>
-                                            <Text>
-                                                {item.reviewBy}
-                                            </Text>
-                                            <Text>
-                                                {item.reviewAt}
-                                            </Text>
-                                            <Text>
-                                                {item.reviewDescription}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.rightHand}>
-                                            <Text style={styles.textStyles}>
-                                                {item.reviewRating.slice(0, -5)}
-                                            </Text>
-                                            <Entypo name="star" size={24} color={Colors.primary} />
-                                        </View>
-                                    </View>
-                                )
-                            }
-                        })}
+                        <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, paddingLeft: 5, fontSize: 28 }]} value={'reviews'} />
+                        {
+                            postReview ? (
+                                <View>
+                                    <PostReviewForm
+                                        onCancel={() => setPostReview(false)}
+                                        onPost={() => postHandler()}
+                                        value={review}
+                                        setValue={setReview}
+                                        rating={defaultRating}
+                                        setRating={setDefaultRating}
+                                    />
+                                </View>
+                            ) : (
+                                <View style={styles.postReviewView}>
+                                    <TouchableHighlight style={styles.postReviewButton} onPress={() => setPostReview(true)}>
+                                        <LanguageText styles={styles.buttonText} value={'postReview'} />
+                                    </TouchableHighlight>
+                                </View>
+                            )
+                        }
+                        <DisplayReviews restId={restId} />
                     </View>
                 ) : (
                     <View>
-                        <Text style={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}>
-                            About:
-                        </Text>
+                        <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]} value={'about'} />
                         <Text>
                             <Text style={styles.timeTextStyles}>
-                                Timing: {openTime} - {closeTime}
+                                <LanguageText styles={styles.timeTextStyles} value={'timing'} />: {openTime} - {closeTime}
                             </Text>
                         </Text>
                         <Text>
                             <Text style={styles.timeTextStyles}>
-                                Address: {address}
+                                <LanguageText styles={styles.timeTextStyles} value={'address'} />: {address}
                             </Text>
                         </Text>
-                        <View style={{ height: 200, backgroundColor: 'green', alignItems: 'center' }}>
+                        {/* <View style={{ height: 200, backgroundColor: 'green', alignItems: 'center' }}>
                             <MapView style={{ height: '100%', width: '90%' }}
                                 initialRegion={{
                                     latitude: parseInt(latitude),
@@ -188,8 +179,8 @@ const RestaurantDetail = ({ navigation, route }) => {
                                         longitude: parseInt(longitude),
                                      }}
                                 />
-                            </MapView>
-                        </View>
+                            </MapView> 
+                        </View>*/}
                     </View>
                 )
             }
@@ -232,7 +223,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         borderRadius: 5,
         height: 40,
-        width: 90
+        width: 100
     },
     buttonStylesFalse: {
         justifyContent: 'center',
@@ -240,11 +231,22 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 5,
         height: 40,
-        width: 90
+        width: 100
+    },
+    postReviewView: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+    },
+    postReviewButton: {
+        backgroundColor: Colors.primary,
+        borderRadius: 5,
+        padding: 10
     },
     buttonText: {
         borderBottomColor: Colors.primary,
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center'
     },
     foodView: {
         flexWrap: 'wrap',
@@ -264,23 +266,6 @@ const styles = StyleSheet.create({
         padding: 10,
         width: 200,
         justifyContent: 'center'
-    },
-    reviewView: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        padding: 10,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 1
-    },
-    leftHand: {
-        width: '80%'
-    },
-    rightHand: {
-        justifyContent: 'center',
-        flexDirection: 'row',
-        width: '20%',
-        alignItems: 'center'
     },
 })
 

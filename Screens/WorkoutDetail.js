@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import homeBasedWorkout from '../data/HomeBasedWorkoutData';
@@ -7,23 +7,35 @@ import LoseWeight from '../data/LoseWeightData';
 import Colors from '../constants/Colors';
 import building from '../data/BuildMuscles';
 
+import i18n from 'i18n-js';
+import { LanguageContext } from '../LanguageContext';
+import translations from '../services/translations';
+import LanguageText from '../components/LanguageText';
+
 const WorkoutDetail = ({ navigation, route }) => {
     const typeName = route.params.workName
     const id = route.params.id
+
+    const { context, setContext } = useContext(LanguageContext);
+    i18n.locale = context
+    i18n.fallbacks = true;
+    i18n.translations = translations
+
     if (typeName === "Home Based Workout") {
         return (
             <View style={styles.screen}>
                 <View>
-                    <Text style={styles.noteText}>
-                        * Perform Circuit 1 of all the exercises followed by Circuit 2 & Circuit 3. *
-                    </Text>
+                    <LanguageText styles={styles.headingText} value={'workout'} />
+                </View>
+                <View>
+                    <LanguageText styles={styles.noteText} value={'excercisesNote'} />
                 </View>
                 <ScrollView>
                     {homeBasedWorkout[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
                                 <Text style={styles.textStyles}>
-                                    {item.id}. {item.catName}
+                                    {item.id}. <LanguageText value={`${item.catName}`} />
                                 </Text>
                                 <Image style={styles.imageStyles} source={item.image1} />
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
@@ -47,23 +59,21 @@ const WorkoutDetail = ({ navigation, route }) => {
         return (
             <View style={styles.screen}>
                 <View>
-                    <Text style={styles.headingText}>
-                        Home Workout
-                    </Text>
+                    <LanguageText styles={styles.headingText} value={`${LoseWeight[id].name}`} />
+                </View>
+                <View>
+                    <LanguageText styles={styles.noteText} value={'excercisesNote'} />
                 </View>
                 <ScrollView>
                     {LoseWeight[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
                                 <Text style={styles.textStyles}>
-                                    {item.id}. {item.catName}
+                                    {item.id}. <LanguageText value={`${item.catName}`} />
                                 </Text>
                                 <Image style={styles.imageStyles} source={item.image1} />
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[1]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[2]}
+                                    <LanguageText value={'circuit'} /> {item.circuit[1]}
                                 </Text>
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
                                     {item.circuit[3]}
@@ -80,30 +90,29 @@ const WorkoutDetail = ({ navigation, route }) => {
         return (
             <View style={styles.screen}>
                 <View>
-                    <Text style={styles.headingText}>
-                        {building[id].name}
-                    </Text>
+                    <LanguageText styles={styles.headingText} value={`${building[id].name}`} />
                 </View>
                 <View>
-                    <Text style={styles.noteText}>
-                        * Perform Circuit 1 of all the exercises followed by Circuit 2 & Circuit 3. *
-                    </Text>
+                    <LanguageText styles={styles.noteText} value={'excercisesNote'} />
                 </View>
                 <ScrollView>
                     {building[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
                                 <Text style={styles.textStyles}>
-                                    {item.id}. {item.catName}
+                                    {item.id}. <LanguageText value={`${item.catName}`} />
                                 </Text>
                                 <Image style={styles.imageStyles} source={item.image1} />
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[1]}
+                                    <LanguageText value={'circuit'} /> {item.circuit[1]}
                                 </Text>
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[2]}
+                                    <LanguageText value={'circuit'} /> {item.circuit[2]}
                                 </Text>
                                 <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                    {
+                                        item.circuit[3] ? <LanguageText value={'circuit'} /> : item.circuit[3]
+                                    }
                                     {item.circuit[3]}
                                 </Text>
                             </View>

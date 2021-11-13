@@ -35,12 +35,7 @@ const FoodScreen = ({ navigation }) => {
                         <FontAwesome name="search" size={30} color={Colors.primary} />
                     </View>
                     <View style={styles.searchText}>
-                        <TextInput style={{ fontSize: 15 }}
-                            placeholder='Search Food'
-                        // onChangeText={text => { setSearch(text) }}
-                        // value={search}
-                        >
-                        </TextInput>
+                        <TextInput style={{ fontSize: 15 }} placeholder='Search Food' />
                     </View>
                 </Card>
             </View>
@@ -53,32 +48,29 @@ const FoodScreen = ({ navigation }) => {
                             return (
                                 <View style={{ marginTop: 10 }} key={item.FoodID} >
                                     <TouchableHighlight underlayColor="#f7b8a5"
-                                            style={{ backgroundColor: 'brown' }}
-                                            onPress={() => {
-                                                navigation.navigate(
-                                                    'FoodDetail', {
-                                                    name: item.FoodName,
-                                                    ingredients: item.Ingredients, nutritionName: item.NutritionName,
-                                                    nutritionValue: item.NutritionValue, recipe: item.Recipe, types: item.Types
-                                                }
-                                                )
+                                        style={{ backgroundColor: 'brown' }}
+                                        onPress={() => {
+                                            navigation.navigate(
+                                                'FoodDetail', {
+                                                name: item.FoodName,
+                                                ingredients: item.Ingredients, nutritionName: item.NutritionName,
+                                                nutritionValue: item.NutritionValue, recipe: item.Recipe, types: item.Types
+                                            }
+                                            )
+                                        }}
+                                    >
+                                        <View style={{ backgroundColor: 'white', width: '100%' }} >
+                                            <View style={{
+                                                backgroundColor: '#f7b8a5', width: '100%',
+                                                flexDirection: 'row', justifyContent: 'space-between'
                                             }}
-                                        >
-                                            <View style={{ backgroundColor: 'white', width: '100%' }} >
-                                                <View style={{
-                                                    backgroundColor: '#f7b8a5', width: '100%',
-                                                    flexDirection: 'row', justifyContent: 'space-between'
-                                                }}
-                                                >
-                                                    <Text style={{ fontSize: 18, fontWeight: 'bold', padding: 10, justifyContent: 'center' }}>
-                                                        {item.FoodName}
-                                                    </Text>
-                                                </View>
+                                            >
+                                                <Text style={{ fontSize: 18, fontWeight: 'bold', padding: 10, justifyContent: 'center' }}>
+                                                    {item.FoodName}
+                                                </Text>
                                             </View>
-                                        </TouchableHighlight>
-                                    {/* <Text>
-                                        {item.FoodName}
-                                    </Text> */}
+                                        </View>
+                                    </TouchableHighlight>
                                 </View>
                             )
                         }

@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Image } from 'react-native';
 
 import { Camera } from 'expo-camera';
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-import i18n from 'i18n-js';
-import { LanguageContext } from '../LanguageContext';
-import translations from '../services/translations';
+import LanguageText from '../components/LanguageText';
 
 import axios from "axios";
 
@@ -20,11 +18,6 @@ const CameraScreen = ({ navigation }) => {
 
     const [response1, setResponse] = useState();
     const [loading, setLoading] = useState(false);
-
-    const { context, setContext } = useContext(LanguageContext)
-    i18n.locale = context
-    i18n.fallbacks = true;
-    i18n.translations = translations
 
     useEffect(() => {
         (async () => {
@@ -95,25 +88,24 @@ const CameraScreen = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>            {
-            clicked ? (
-                <View style={styles.camera}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 28, fontWeight: 'bold' }}>
-                            {i18n.t('imageIsProcessing')}
-                        </Text>
+        <View style={styles.container}>
+            {
+                clicked ? (
+                    <View style={styles.camera}>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <LanguageText styles={styles.textStyles} value={'imageIsProcessing'} />
+                        </View>
                     </View>
-                </View>
-            ) : (
-                <Camera style={styles.camera} type={type}
-                    ref={(ref) => {
-                        setCameraRef(ref);
-                    }}>
+                ) : (
+                    <Camera style={styles.camera} type={type}
+                        ref={(ref) => {
+                            setCameraRef(ref);
+                        }}>
 
-                </Camera>
+                    </Camera>
 
-            )
-        }
+                )
+            }
             <View style={styles.bottom}>
                 <TouchableOpacity stlye={styles.button} onPress={() => takePicture()}>
                     <Entypo name="circle" size={100} color="white" />

@@ -6,8 +6,19 @@ import Colors from '../constants/Colors';
 
 import DietPlansData from '../data/DietPlansData';
 
+import LanguageText from '../components/LanguageText';
+
 const DietPlansDetails = ({ navigation, route }) => {
-    const name = route.params.name
+    const id = route.params.id
+
+    var name = ''
+
+    if (id === 1) {
+        name = 'Calculate BMI'
+    }
+    if (id === 2) {
+        name = 'Diet Plans'
+    }
 
     const [weight, setweight] = useState('')
     const [feet, setFeet] = useState('')
@@ -39,29 +50,20 @@ const DietPlansDetails = ({ navigation, route }) => {
     }
     if (name === 'Calculate BMI') {
         return (
-            <KeyboardAvoidingView style={styles.screen} behavior='height'>
+            <KeyboardAvoidingView style={styles.screen} behavior='height' keyboardVerticalOffset={'10'}>
                 <View style={styles.BmiInformationView}>
-                    <Text style={styles.headingText}>
-                        What is BMI?
-                    </Text>
-                    <Text style={styles.innerHeading}>
-                        BMI actually stands for Body Mass Index, and it’s a really
-                        important measure for anyone trying to lose weight.
-                        Calculating your BMI using our simple BMI calculator will
-                        show you where you are now, and where would be best for you.
-                    </Text>
-                    <Text style={styles.innerHeading}>
-                        BMI Categories:
-                    </Text>
+                    <LanguageText styles={styles.headingText} value={'whatIsBMI'} />
+                    <LanguageText styles={styles.innerHeading} value={'bmiInfo'} />
+                    <LanguageText styles={styles.innerHeading} value={'bmiCategory'} />
                     <View style={{ paddingLeft: 25, paddingTop: 5 }}>
                         <Text style={styles.innerHeading}>
-                            - UnderWeight = Less than 18.5
+                            - <LanguageText styles={styles.innerHeading} value={'underWeight'} /> = <LanguageText styles={styles.innerHeading} value={'lessThan'} /> 18.5
                         </Text>
                         <Text style={styles.innerHeading}>
-                            - Normal Weight = 18.5 - 24.9
+                            - <LanguageText styles={styles.innerHeading} value={'normalWeight'} /> = 18.5 - 24.9
                         </Text>
                         <Text style={styles.innerHeading}>
-                            - Over Weight = Greater then 30
+                            - <LanguageText styles={styles.innerHeading} value={'overWeight'} /> = Greater then 30
                         </Text>
                     </View>
                 </View>
@@ -69,7 +71,7 @@ const DietPlansDetails = ({ navigation, route }) => {
                     <Card style={styles.cardStyles}>
                         <View style={styles.BMIView}>
                             <Text style={styles.textStyles}>
-                                Weight( in kg ):
+                                <LanguageText styles={styles.textStyles} value={'weight'} />( in kg ):
                             </Text>
                             <TextInput
                                 placeholder='Kg'
@@ -79,9 +81,7 @@ const DietPlansDetails = ({ navigation, route }) => {
                             />
                         </View>
                         <View style={styles.BMIView}>
-                            <Text style={styles.textStyles}>
-                                Height:
-                            </Text>
+                            <LanguageText styles={styles.textStyles} value={'height'} />
                             <TextInput
                                 placeholder='Feet'
                                 style={styles.inputStyles}
@@ -97,15 +97,11 @@ const DietPlansDetails = ({ navigation, route }) => {
                         </View>
                         <View style={styles.calculateButtonView}>
                             <TouchableHighlight onPress={CalculateBMI} style={styles.calculateButton}>
-                                <Text style={styles.buttonText}>
-                                    Calculate
-                                </Text>
+                                <LanguageText styles={styles.buttonText} value={'calculate'} />
                             </TouchableHighlight>
                         </View>
                         <View style={styles.resultView}>
-                            <Text style={styles.textStyles}>
-                                Your BMI is:
-                            </Text>
+                            <LanguageText styles={styles.textStyles} value={'yourBmiIs'} />
                             <Text style={[styles.textStyles, { paddingHorizontal: 5, color: Colors.primary }]}>
                                 {result}
                             </Text>
@@ -114,22 +110,16 @@ const DietPlansDetails = ({ navigation, route }) => {
 
                 </View>
                 <View style={styles.BmiNoteView}>
-                    <View style={[styles.BmiInformation, { paddingTop: 15, height: '20%' }]}>
-                        <Text style={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]}>
-                            After Calculation BMI, you can go to Diet Plans section and follow diet plans to maintain your BMI
-                        </Text>
-                    </View>
+                    <LanguageText styles={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]} value={'bmiNote'} />
                 </View>
             </KeyboardAvoidingView>
         )
     }
-    else {
+    else if (name === 'Diet Plans') {
         return (
             <View style={styles.screen}>
                 <View style={styles.upperScreen}>
-                    <Text style={styles.upperText}>
-                        * Calculate Your BMI first to follow diet plans according to your BMI *
-                    </Text>
+                    <LanguageText styles={styles.upperText} value={'mealPlanNote'} />
                 </View>
                 <View style={styles.screenInner}>
                     {DietPlansData.map(item => {
@@ -161,8 +151,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     BmiInformationView: {
-        height: '40%',
         padding: 10,
+        paddingBottom: 30,
         width: '90%'
     },
     headingText: {
@@ -175,12 +165,12 @@ const styles = StyleSheet.create({
         textAlign: 'justify'
     },
     BmiCalculatorView: {
-        height: '40%',
+        // height: '40%',
         width: '90%'
     },
     cardStyles: {
         padding: 20,
-        height: '100%',
+        // height: '100%',
         width: '100%'
     },
     BMIView: {
@@ -205,7 +195,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     calculateButton: {
-        height: '100%',
+        // height: '100%',
+        height: 50,
         backgroundColor: Colors.primary,
         justifyContent: 'center',
         borderRadius: 15,
@@ -221,8 +212,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     BmiNoteView: {
-        height: '15%',
-        width: '90%'
+        width: '90%',
+        paddingTop: 15
     },
     upperScreen: {
         width: '90%',

@@ -1,12 +1,12 @@
 const dietPlans = [
     {
         id: 1,
-        name: 'Calculate BMI',
+        name: 'calculateBMI',
         imageSource: require('../assets/BMI.jpg')
     },
     {
         id: 2,
-        name: 'Diet Plans',
+        name: 'diet',
         imageSource: require('../assets/DietSelect.jpg')
     }
 ]

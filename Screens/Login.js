@@ -5,6 +5,7 @@ import { SocialIcon } from 'react-native-elements';
 
 import Colors from '../constants/Colors';
 import Auth from '../services/auth';
+import LanguageText from '../components/LanguageText';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -14,9 +15,7 @@ const Login = ({ navigation }) => {
         <View style={styles.container}>
             <LinearGradient colors={Colors.gradient} style={styles.background}>
                 <View style={styles.heading}>
-                    <Text style={styles.headingText}>
-                        Login
-                    </Text>
+                    <LanguageText styles={styles.headingText} value={'login'} />
                 </View>
                 <View style={styles.bottomView}>
                     <TextInput style={styles.inputEmail}
@@ -38,25 +37,23 @@ const Login = ({ navigation }) => {
                             style={{ backgroundColor: 'white', width: '80%', borderRadius: 30 }}
                             onPress={() => Auth.signIn(email, password)}
                         >
-                            <Text style={{ textAlign: 'center', fontSize: 30, color: 'orange', padding: 10 }}>
-                                Login
-                            </Text>
+                            <LanguageText styles={{ textAlign: 'center', fontSize: 30, color: 'orange', padding: 10 }} value={'login'} />
                         </TouchableHighlight>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20 }}>Don't have account? </Text>
+
+                        <LanguageText styles={{ fontSize: 20 }} value={'dontHaveAccount'} />
                         <TouchableOpacity style={{ borderBottomWidth: 2 }} onPress={() => { navigation.navigate('Signup') }}>
-                            <Text style={{ fontSize: 18 }}>Signup</Text>
+                            <LanguageText styles={{ fontSize: 18 }} value={'signup'} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ flexDirection: 'column', alignItems: 'center', margin: 10 }}>
                         <Text style={{ fontSize: 20, padding: 10 }}>OR</Text>
-                        <Text style={{ fontSize: 20 }}>
-                            Continue with
-                        </Text>
+
+                        <LanguageText styles={{ fontSize: 20 }} value={'continueWith'} />
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableHighlight onPress={Auth.GoogleLogin} >
+                        <TouchableHighlight>
                             <SocialIcon type="google" />
                         </TouchableHighlight>
                         <TouchableHighlight>

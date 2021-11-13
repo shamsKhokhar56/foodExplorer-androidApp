@@ -1,5 +1,4 @@
 import React from 'react';
-import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firebase from '../Firebase/fire';
 

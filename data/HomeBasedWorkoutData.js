@@ -5,11 +5,11 @@ const homeBasedWorkout = [
         category: [
             {
                 id: '1',
-                catName: 'High Knees',
+                catName: 'highKnees',
                 circuit: {
-                    1: 'Circuit 1: 35 Reps',
-                    2: 'Circuit 2: 40 Reps',
-                    3: 'Circuit 3: 40 Reps'
+                    1: '1: 35 Reps',
+                    2: '2: 40 Reps',
+                    3: '3: 40 Reps'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -18,11 +18,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '2',
-                catName: 'Jumping Jacks',
+                catName: 'jumpingJacks',
                 circuit: {
-                    1: 'Circuit 1: 30 Reps',
-                    2: 'Circuit 2: 35 Reps',
-                    3: 'Circuit 3: 40 Reps'
+                    1: '1: 30 Reps',
+                    2: '2: 35 Reps',
+                    3: '3: 40 Reps'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -31,11 +31,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '3',
-                catName: 'Squats',
+                catName: 'squats',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 20 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 20 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -44,11 +44,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '4',
-                catName: 'Side Leg Raise',
+                catName: 'sideLegRaise',
                 circuit: {
-                    1: 'Circuit 1: 16 Reps (Each Leg)',
-                    2: 'Circuit 2: 20 Reps (Each Leg)',
-                    3: 'Circuit 3: 20 Reps (Each Leg)'
+                    1: '1: 16 Reps (Each Leg)',
+                    2: '2: 20 Reps (Each Leg)',
+                    3: '3: 20 Reps (Each Leg)'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -57,11 +57,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '5',
-                catName: 'Push Ups',
+                catName: 'pushUps',
                 circuit: {
-                    1: 'Circuit 1: 16 Reps',
-                    2: 'Circuit 2: 14 Reps',
-                    3: 'Circuit 3: 12 Reps'
+                    1: '1: 16 Reps',
+                    2: '2: 14 Reps',
+                    3: '3: 12 Reps'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -70,11 +70,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '6',
-                catName: 'Side Plank',
+                catName: 'sidePlank',
                 circuit: {
-                    1: 'Circuit 1: Hold the postition for 1 min',
-                    2: 'Circuit 2: Hold the postition for 1 min',
-                    3: 'Circuit 3: Hold the postition for 1 min'
+                    1: '1: Hold the postition for 1 min',
+                    2: '2: Hold the postition for 1 min',
+                    3: '3: Hold the postition for 1 min'
                 },
                 image1: require('../assets/workout.jpg'),
                 image2: '2',
@@ -89,11 +89,11 @@ const homeBasedWorkout = [
         category: [
             {
                 id: '1',
-                catName: 'Mountain Climbers',
+                catName: 'mountainClimbers',
                 circuit: {
-                    1: 'Circuit 1: 40 Reps',
-                    2: 'Circuit 2: 35 Reps',
-                    3: 'Circuit 3: 30 Reps'
+                    1: '1: 40 Reps',
+                    2: '2: 35 Reps',
+                    3: '3: 30 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -102,11 +102,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '2',
-                catName: 'Squat Jumps',
+                catName: 'squatJumps',
                 circuit: {
-                    1: 'Circuit 1: 16 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 16 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -115,11 +115,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '3',
-                catName: 'Lunges',
+                catName: 'lunges',
                 circuit: {
-                    1: 'Circuit 1: 12 Reps (Each leg)',
-                    2: 'Circuit 2: 14 Reps (Each leg)',
-                    3: 'Circuit 3: 12 Reps (Each leg)'
+                    1: '1: 12 Reps (Each leg)',
+                    2: '2: 14 Reps (Each leg)',
+                    3: '3: 12 Reps (Each leg)'
                 },
                 image1: '1',
                 image2: '2',
@@ -128,7 +128,7 @@ const homeBasedWorkout = [
             },
             {
                 id: '4',
-                catName: 'Plank',
+                catName: 'plank',
                 circuit: {
                     1: 'Hold the position for 35 sec',
                     2: 'Hold the position for 45 sec',
@@ -141,11 +141,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '5',
-                catName: 'Toe Toucher Crunches',
+                catName: 'toeToucherCrunches',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 18 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 18 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -154,11 +154,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '6',
-                catName: 'Cross Over',
+                catName: 'crossOver',
                 circuit: {
-                    1: 'Circuit 1: 18 Reps (Each Side)',
-                    2: 'Circuit 2: 15 Reps (Each Side)',
-                    3: 'Circuit 3: 14 Reps (Each Side)'
+                    1: '1: 18 Reps (Each Side)',
+                    2: '2: 15 Reps (Each Side)',
+                    3: '3: 14 Reps (Each Side)'
                 },
                 image1: '1',
                 image2: '2',
@@ -167,11 +167,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '7',
-                catName: 'Leg Raise',
+                catName: 'legRaise',
                 circuit: {
-                    1: 'Circuit 1: 16 Reps (Each Leg)',
-                    2: 'Circuit 2: 16 Reps (Each Leg)',
-                    3: 'Circuit 3: 16 Reps (Each Leg)'
+                    1: '1: 16 Reps (Each Leg)',
+                    2: '2: 16 Reps (Each Leg)',
+                    3: '3: 16 Reps (Each Leg)'
                 },
                 image1: '1',
                 image2: '2',
@@ -186,11 +186,11 @@ const homeBasedWorkout = [
         category: [
             {
                 id: '1',
-                catName: 'Jumping Jacks',
+                catName: 'jumpingJacks',
                 circuit: {
-                    1: 'Circuit 1: 30 Reps',
-                    2: 'Circuit 2: 35 Reps',
-                    3: 'Circuit 3: 40 Reps'
+                    1: '1: 30 Reps',
+                    2: '2: 35 Reps',
+                    3: '3: 40 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -199,11 +199,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '2',
-                catName: 'Crunches',
+                catName: 'crunches',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -212,7 +212,7 @@ const homeBasedWorkout = [
             },
             {
                 id: '3',
-                catName: 'Side Plank',
+                catName: 'sidePlank',
                 circuit: {
                     1: 'Hold the position for 45 sec',
                     2: 'Hold the position for 60 sec',
@@ -225,11 +225,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '4',
-                catName: 'Lying Leg Raise',
+                catName: 'lyingLegRaise',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 20 Reps',
-                    3: 'Circuit 3: 20 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 20 Reps',
+                    3: '3: 20 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -238,11 +238,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '5',
-                catName: 'High Knees',
+                catName: 'highKnees',
                 circuit: {
-                    1: 'Circuit 1: 30 Reps',
-                    2: 'Circuit 2: 35 Reps',
-                    3: 'Circuit 3: 30 Reps'
+                    1: '1: 30 Reps',
+                    2: '2: 35 Reps',
+                    3: '3: 30 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -251,11 +251,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '6',
-                catName: 'Butt Ups',
+                catName: 'buttUps',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 20 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 20 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -270,11 +270,11 @@ const homeBasedWorkout = [
         category: [
             {
                 id: '1',
-                catName: 'Squats',
+                catName: 'squats',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 18 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 18 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -283,11 +283,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '2',
-                catName: 'Push Ups',
+                catName: 'pushUps',
                 circuit: {
-                    1: 'Circuit 1: 16 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 16 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -296,11 +296,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '3',
-                catName: 'Side Leg Raise',
+                catName: 'sideLegRaise',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps (In & Out)' ,
-                    2: 'Circuit 2: 18 Reps (In & Out)',
-                    3: 'Circuit 3: 16 Reps (In & Out)'
+                    1: '1: 20 Reps (In & Out)' ,
+                    2: '2: 18 Reps (In & Out)',
+                    3: '3: 16 Reps (In & Out)'
                 },
                 image1: '1',
                 image2: '2',
@@ -309,11 +309,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '4',
-                catName: 'Bottom Up Standing',
+                catName: 'bottomUpStanding',
                 circuit: {
-                    1: 'Circuit 1: 18 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 18 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -322,11 +322,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '5',
-                catName: 'Butts Up',
+                catName: 'buttsUp',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 18 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 18 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -335,11 +335,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '6',
-                catName: 'OverHead Stretch',
+                catName: 'overHeadStretch',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps (Up & Down)',
-                    2: 'Circuit 2: 20 Reps (Up & Down)',
-                    3: 'Circuit 3: 20 Reps (Up & Down)'
+                    1: '1: 20 Reps (Up & Down)',
+                    2: '2: 20 Reps (Up & Down)',
+                    3: '3: 20 Reps (Up & Down)'
                 },
                 image1: '1',
                 image2: '2',
@@ -348,11 +348,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '7',
-                catName: 'Chest Stretch',
+                catName: 'chestStretch',
                 circuit: {
-                    1: 'Circuit 1: 18 Reps',
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 18 Reps',
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -367,11 +367,11 @@ const homeBasedWorkout = [
         category: [
             {
                 id: '1',
-                catName: 'Cross Over',
+                catName: 'crossOver',
                 circuit: {
-                    1: 'Circuit 1: 30 Reps',
-                    2: 'Circuit 2: 26 Reps',
-                    3: 'Circuit 3: 24 Reps'
+                    1: '1: 30 Reps',
+                    2: '2: 26 Reps',
+                    3: '3: 24 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -380,11 +380,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '2',
-                catName: 'Mountain Climbers',
+                catName: 'mountainClimbers',
                 circuit: {
-                    1: 'Circuit 1: 40 Reps',
-                    2: 'Circuit 2: 35 Reps',
-                    3: 'Circuit 3: 30 Reps'
+                    1: '1: 40 Reps',
+                    2: '2: 35 Reps',
+                    3: '3: 30 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -393,11 +393,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '3',
-                catName: 'Push Ups',
+                catName: 'pushUps',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps' ,
-                    2: 'Circuit 2: 16 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps' ,
+                    2: '2: 16 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -406,11 +406,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '4',
-                catName: 'Plank',
+                catName: 'plank',
                 circuit: {
-                    1: 'Circuit 1: Hold the position for 1 min.',
-                    2: 'Circuit 2: Hold the position for 1 min.',
-                    3: 'Circuit 3: Hold the position for 90 sec.'
+                    1: '1: Hold the position for 1 min.',
+                    2: '2: Hold the position for 1 min.',
+                    3: '3: Hold the position for 90 sec.'
                 },
                 image1: '1',
                 image2: '2',
@@ -419,11 +419,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '5',
-                catName: 'Split Squats',
+                catName: 'splitSquats',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 18 Reps',
-                    3: 'Circuit 3: 16 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 18 Reps',
+                    3: '3: 16 Reps'
                 },
                 image1: '1',
                 image2: '2',
@@ -432,11 +432,11 @@ const homeBasedWorkout = [
             },
             {
                 id: '6',
-                catName: 'Bicycle Crunches',
+                catName: 'bicycleCrunches',
                 circuit: {
-                    1: 'Circuit 1: 20 Reps',
-                    2: 'Circuit 2: 20 Reps',
-                    3: 'Circuit 3: 20 Reps'
+                    1: '1: 20 Reps',
+                    2: '2: 20 Reps',
+                    3: '3: 20 Reps'
                 },
                 image1: '1',
                 image2: '2',

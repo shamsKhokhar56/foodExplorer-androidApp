@@ -4,463 +4,471 @@ import DietPlansData from '../data/DietPlansData';
 
 import Colors from '../constants/Colors';
 
+import { useContext } from 'react';
+import i18n from 'i18n-js';
+import { LanguageContext } from '../LanguageContext';
+import translations from '../services/translations';
+import LanguageText from '../components/LanguageText';
+
 const DietPlansDetailsView = ({ navigation, route }) => {
     const id = route.params.id
+    const { context, setContext } = useContext(LanguageContext);
+    i18n.locale = context
+    i18n.fallbacks = true;
+    i18n.translations = translations
+    var name = 'name'
+    if (id === 0) {
+        name = 'NormalWeight'
+    }
+    if (id === 1) {
+        name = 'MaintainWeight'
+    }
+    if (id === 2) {
+        name = 'OverWeight'
+    }
+
     return (
         <View style={styles.screen}>
             <ScrollView>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Sunday
-                    </Text>
+                    <LanguageText styles={styles.dayText} value={'sunday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')} {i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].sundayBreakfast}
+                            {i18n.t(`sundayBreakfast${name}`)}
+                            {/* {DietPlansData[id].sundayBreakfast} */}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')} {i18n.t(`snackTime${name}`)}
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].sundaySnack}
+                            {i18n.t(`sundaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')} {i18n.t(`lunchTime${name}`)}
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].sundayLunch}
+                            {i18n.t(`sundayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')} {i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].sundayEvening}
+                            {i18n.t(`sundayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')} {i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].sundayDinner}
+                            {i18n.t(`sundayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Monday
-                    </Text>
+                    <LanguageText styles={styles.dayText} value={'monday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')} {i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].mondayBreakfast}
+                            {i18n.t(`mondayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].mondaySnack}
+                            {i18n.t(`mondaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].mondayLunch}
+                            {i18n.t(`mondayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].mondayEvening}
+                            {i18n.t(`mondayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].mondayDinner}
+                            {i18n.t(`mondayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Tuesday
-                    </Text>
+                    <LanguageText styles={styles.dayText} value={'tuesday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].tuesdayBreakfast}
+                            {i18n.t(`tuesdayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].tuesdaySnack}
+                            {i18n.t(`tuesdaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].tuesdayLunch}
+                            {i18n.t(`tuesdayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].tuesdayEvening}
+                            {i18n.t(`tuesdayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].tuesdayDinner}
+                            {i18n.t(`tuesdayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Wednesday
-                    </Text>
+                    <LanguageText styles={styles.dayText} value={'wednesday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].wednesdayBreakfast}
+                            {i18n.t(`wednesdayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].wednesdaySnack}
+                            {i18n.t(`wednesdaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].wednesdayLunch}
+                            {i18n.t(`wednesdayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].wednesdayEvening}
+                            {i18n.t(`wednesdayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].wednesdayDinner}
+                            {i18n.t(`wednesdayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Thursday
-                    </Text>
+                <LanguageText styles={styles.dayText} value={'thursday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].thursdayBreakfast}
+                            {i18n.t(`thursdayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].thursdaySnack}
+                            {i18n.t(`thursdaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].thursdayLunch}
+                            {i18n.t(`thursdayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].thursdayEvening}
+                            {i18n.t(`thursdayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].thursdayDinner}
+                            {i18n.t(`thursdayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Friday
-                    </Text>
+                <LanguageText styles={styles.dayText} value={'friday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].fridayBreakfast}
+                            {i18n.t(`fridayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].fridaySnack}
+                            {i18n.t(`fridaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].fridayLunch}
+                            {i18n.t(`fridayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].fridayEvening}
+                            {i18n.t(`fridayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].fridayDinner}
+                            {i18n.t(`fridayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dayView}>
-                    <Text style={styles.dayText}>
-                        Saturday
-                    </Text>
+                <LanguageText styles={styles.dayText} value={'saturday'} />
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Breakfast {DietPlansData[id].breakfastTime}:
+                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].saturdayBreakfast}
+                            {i18n.t(`saturdayBreakfast${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Mid-Meal {DietPlansData[id].snackTime}:
+                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].saturdaySnack}
+                            {i18n.t(`saturdaySnack${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Lunch {DietPlansData[id].lunchTime}:
+                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].saturdayLunch}
+                            {i18n.t(`saturdayLunch${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Evening {DietPlansData[id].eveningTime}:
+                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].saturdayEvening}
+                            {i18n.t(`saturdayEvening${name}`)}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.dietPlanView}>
                     <View style={{ width: '20%', borderRightWidth: 1, borderRightColor: 'black', borderBottomColor: 'black', borderBottomWidth: 1 }}>
                         <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
-                            Dinner {DietPlansData[id].dinnerTime}:
+                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
                         </Text>
                     </View>
                     <View style={{ width: '80%', paddingLeft: 5, borderBottomWidth: 1, borderBottomColor: 'black', justifyContent: 'center' }}>
                         <Text style={styles.textStyles}>
-                            {DietPlansData[id].saturdayDinner}
+                            {i18n.t(`saturdayDinner${name}`)}
                         </Text>
                     </View>
                 </View>
@@ -491,7 +499,12 @@ const styles = StyleSheet.create({
     },
     textStyles: {
         fontSize: 16,
-        textAlign: 'justify'
+        textAlign: 'justify',
+    },
+    headingTextStyles: {
+        fontSize: 16,
+        textAlign: 'justify',
+        fontWeight: 'bold'
     },
 
 })

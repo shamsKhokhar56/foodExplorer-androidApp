@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, Text, View, TouchableHighlight, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Image, TextInput, FlatList } from 'react-native'
 import Loading from '../components/Loading';
-import Restaurant from '../data/Restaurant';
 
 import firebase from '../Firebase/fire'
 
@@ -18,6 +17,19 @@ const RestaurantFromCities = ({ navigation, route }) => {
     const [resData, setResData] = useState();
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState('');
+
+    const getData = async () => {
+        const ref = firebase.firestore().collection(`Restaurant${cityName}`)
+        await ref.get().then((item) => {
+            const items = item.docs.map((doc) => doc.data());
+            setResData(items);
+            setLoading(false);
+        })
+
+    }
+    useEffect(() => {
+        getData();
+    }, []);
 
 
     return (
@@ -40,53 +52,98 @@ const RestaurantFromCities = ({ navigation, route }) => {
                 loading ? (
                     <Loading />
                 ) : (
-                    <ScrollView>
-                        {Restaurant.map(
-                            (item) => {
-                                if (item.city === cityName) {
-                                    if (item.restaurantName.toLowerCase().includes(search.toLowerCase()) || search == '') {
-                                        return (
-                                            <View style={styles.restaurantView} key={item.restaurantId}>
-                                                <TouchableHighlight activeOpacity={0.6} underlayColor={'white'}
-                                                    onPress={() => {
-                                                        navigation.navigate('RestaurantDetail', {
-                                                            restId: item.restaurantId,
-                                                            name: item.restaurantName,
-                                                            linkNumber: item.linkNumber,
-                                                            cityCode: item.cityCode,
-                                                            rating: item.restaurantRating,
-                                                            openTime: item.openingTime,
-                                                            closeTime: item.closingTime,
-                                                            address: item.restaurantAddress,
-                                                            latitude: item.latitude,
-                                                            longitude: item.longitude,
-                                                            image: item.restaurantImage,
-                                                            city: item.city
+                    <FlatList
+                        data={resData}
+                        keyExtractor={item => item.restaurantId}
+                        renderItem={({ item }) => {
+                            if (item.restaurantName.toLowerCase().includes(search.toLowerCase()) || search == '') {
+                                return (
+                                    <View style={styles.restaurantView} key={item.restaurantId}>
+                                        <TouchableHighlight activeOpacity={0.6} underlayColor={'white'}
+                                            onPress={() => {
+                                                navigation.navigate('RestaurantDetail', {
+                                                    restId: item.restaurantId,
+                                                    name: item.restaurantName,
+                                                    linkNumber: item.linkNumber,
+                                                    cityCode: item.cityCode,
+                                                    rating: item.restaurantRating,
+                                                    openTime: item.openingTime,
+                                                    closeTime: item.closingTime,
+                                                    address: item.restaurantAddress,
+                                                    latitude: item.latitude,
+                                                    longitude: item.longitude,
+                                                    image: item.restaurantImage,
+                                                    city: item.city
 
-                                                        })
-                                                    }}>
-                                                    <View>
-                                                        <Image style={styles.imageStyles} source={{ uri: item.restaurantImage }} />
-                                                        <View style={styles.restaurantDetails}>
-                                                            <Text style={styles.textStyles}>
-                                                                {item.restaurantName}
-                                                            </Text>
-                                                            <View style={styles.ratingStyles}>
-                                                                <Entypo name="star" size={20} color={Colors.primary} />
-                                                                <Text style={styles.textStyles}>
-                                                                    {item.restaurantRating.slice(0, -5)}
-                                                                </Text>
-                                                            </View>
-                                                        </View>
+                                                })
+                                            }}>
+                                            <View>
+                                                <Image style={styles.imageStyles} source={{ uri: item.restaurantImage }} />
+                                                <View style={styles.restaurantDetails}>
+                                                    <Text style={styles.textStyles}>
+                                                        {item.restaurantId} {'  '} {item.restaurantName}
+                                                    </Text>
+                                                    <View style={styles.ratingStyles}>
+                                                        <Entypo name="star" size={20} color={Colors.primary} />
+                                                        <Text style={styles.textStyles}>
+                                                            {item.restaurantRating.slice(0, -5)}
+                                                        </Text>
                                                     </View>
-                                                </TouchableHighlight>
+                                                </View>
                                             </View>
-                                        )
-                                    }
-                                }
+                                        </TouchableHighlight>
+                                    </View>
+                                )
                             }
-                        )}
-                    </ScrollView>
+                        }}
+                    />
+                    // <ScrollView>
+                    //     {Restaurant.map(
+                    //         (item) => {
+                    //             if (item.city === cityName) {
+                    //                 if (item.restaurantName.toLowerCase().includes(search.toLowerCase()) || search == '') {
+                    //                     return (
+                    //                         <View style={styles.restaurantView} key={item.restaurantId}>
+                    //                             <TouchableHighlight activeOpacity={0.6} underlayColor={'white'}
+                    //                                 onPress={() => {
+                    //                                     navigation.navigate('RestaurantDetail', {
+                    //                                         restId: item.restaurantId,
+                    //                                         name: item.restaurantName,
+                    //                                         linkNumber: item.linkNumber,
+                    //                                         cityCode: item.cityCode,
+                    //                                         rating: item.restaurantRating,
+                    //                                         openTime: item.openingTime,
+                    //                                         closeTime: item.closingTime,
+                    //                                         address: item.restaurantAddress,
+                    //                                         latitude: item.latitude,
+                    //                                         longitude: item.longitude,
+                    //                                         image: item.restaurantImage,
+                    //                                         city: item.city
+
+                    //                                     })
+                    //                                 }}>
+                    //                                 <View>
+                    //                                     <Image style={styles.imageStyles} source={{ uri: item.restaurantImage }} />
+                    //                                     <View style={styles.restaurantDetails}>
+                    //                                         <Text style={styles.textStyles}>
+                    //                                             {item.restaurantName}
+                    //                                         </Text>
+                    //                                         <View style={styles.ratingStyles}>
+                    //                                             <Entypo name="star" size={20} color={Colors.primary} />
+                    //                                             <Text style={styles.textStyles}>
+                    //                                                 {item.restaurantRating.slice(0, -5)}
+                    //                                             </Text>
+                    //                                         </View>
+                    //                                     </View>
+                    //                                 </View>
+                    //                             </TouchableHighlight>
+                    //                         </View>
+                    //                     )
+                    //                 }
+                    //             }
+                    //         }
+                    //     )}
+                    // </ScrollView>
                 )
             }
         </View>

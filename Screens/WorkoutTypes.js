@@ -12,10 +12,24 @@ import Card from '../components/Card';
 
 import Colors from '../constants/Colors';
 import building from '../data/BuildMuscles';
+;
+import LanguageText from '../components/LanguageText';
 
 
 const WorkoutTypes = ({ route, navigation }) => {
-    const name = route.params.workoutName
+    const workoutNameId = route.params.workoutId
+    var name = ''
+
+    if (workoutNameId === 1) {
+        name = 'Home Based Workout'
+    }
+    if (workoutNameId === 2) {
+        name = 'Build Muscles'
+    }
+    if (workoutNameId === 3) {
+        name = 'Lose Weight'
+    }
+
     if (name === "Home Based Workout") {
         return (
             <View style={styles.screen}>
@@ -34,14 +48,7 @@ const WorkoutTypes = ({ route, navigation }) => {
                                         })
                                     }
                                     }>
-                                    {/* <ImageBackground style={styles.imageStyle} source={item.image}>
-                                 <Text style={styles.innerTextStyles}>
-                                     {item.name}
-                                     </Text>
-                                    </ImageBackground> */}
-                                    <Text style={styles.innerTextStyles}>
-                                        {item.name}
-                                    </Text>
+                                    <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
                                 </TouchableHighlight>
                             </Card>
                         )
@@ -70,9 +77,7 @@ const WorkoutTypes = ({ route, navigation }) => {
                                     }
                                     }>
                                     <ImageBackground style={styles.imageStyle} source={item.image}>
-                                        <Text style={styles.innerTextStyles}>
-                                            {item.name}
-                                        </Text>
+                                        <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
                                     </ImageBackground>
                                 </TouchableHighlight>
                             </Card>
@@ -82,7 +87,7 @@ const WorkoutTypes = ({ route, navigation }) => {
             </View>
         )
     }
-    else {
+    else if (name === 'Lose Weight') {
         return (
             <View style={styles.screen}>
                 <FlatList
@@ -101,9 +106,7 @@ const WorkoutTypes = ({ route, navigation }) => {
                                     }
                                     }>
                                     <ImageBackground style={styles.imageStyle} source={item.image}>
-                                        <Text style={styles.innerTextStyles}>
-                                            {item.name}
-                                        </Text>
+                                        <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
                                     </ImageBackground>
                                 </TouchableHighlight>
                             </Card>
