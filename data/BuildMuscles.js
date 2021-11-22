@@ -121,7 +121,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/hammerCurls.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -133,7 +133,7 @@ const building = [
                     1: '1: 12 Reps',
                     2: '2: 10 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/barbellCurls.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -145,7 +145,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/barPreacherCurls.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -164,7 +164,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 10 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/lyingTricepsExtension.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -176,7 +176,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 14 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/tricepsDips.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -188,7 +188,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 10 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/closeGripEZBarBenchPress.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -200,7 +200,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 14 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/tricepDipsMachine.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -219,7 +219,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/swissBallCrunches.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -231,7 +231,7 @@ const building = [
                     1: '1: Hold the Position for 1 min',
                     2: '2: Hold the Position for 1 min',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/plank.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -243,7 +243,7 @@ const building = [
                     1: '1: 12 Reps',
                     2: '2: 10 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/bicycleCrunches.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -255,7 +255,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/lyingLegRaise.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -267,7 +267,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 14 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/declineObligueCrunches.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -286,7 +286,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/dumbellBentOver.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -298,7 +298,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/deadLift.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -310,7 +310,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/hyperExtension.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -329,7 +329,7 @@ const building = [
                     1: '1: 14 Reps',
                     2: '2: 10 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/plainBenchBarbellPress.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -341,7 +341,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/inclineBenchDumbellPress.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -353,7 +353,7 @@ const building = [
                     1: '1: 15 Reps',
                     2: '2: 12 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/pushUps.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 
@@ -365,7 +365,7 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 14 Reps',
                 },
-                image1: require('../assets/workout.jpg'),
+                image1: require('../assets/butterfly.jpg'),
                 image2: '2',
                 howToDo: 'This is the way'
 

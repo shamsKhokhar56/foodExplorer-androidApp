@@ -9,13 +9,14 @@ import CustomSidebarMenu from '../Screens/CustomSidebarMenu';
 import FoodScreen from '../Screens/FoodScreen';
 import RestaurantFromCities from '../Screens/RestaurantFromCities'
 import RestaurantScreen from '../Screens/RestaurantScreen';
-import FoodDetail from '../Screens/FoodDetail';
 import WorkoutMain from '../Screens/WorkoutMain';
 import WorkoutTypes from '../Screens/WorkoutTypes';
 
-import { Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import WorkoutDetail from '../Screens/WorkoutDetail';
@@ -24,7 +25,6 @@ import DietPlans from '../Screens/DietPlans';
 import DietPlansDetails from '../Screens/DietPlansDetails';
 import DietPlansDetailsView from '../Screens/DietPlansDetailsView';
 import Settings from '../Screens/Settings';
-import Login from '../Screens/Login';
 import CameraScreen from '../Screens/CameraScreen';
 import CitiesScreen from '../Screens/CitiesScreen';
 import ResultScreen from '../Screens/ResultScreen';
@@ -81,25 +81,6 @@ function dashboardScreenStack({ navigation }) {
                 }}
             />
             <Stack.Screen
-                name="FoodDetail"
-                component={FoodDetail}
-                options={{
-                    title: 'Food Detail', //Set Header Title
-                    headerLeft: () => (
-                        <Ionicons name="arrow-back" size={35} color="white"
-                            style={{ margin: 10 }} onPress={() => navigation.goBack()}
-                        />
-                    ),
-                    headerStyle: {
-                        backgroundColor: Colors.primary, //Set Header color
-                    },
-                    headerTintColor: '#fff', //Set Header text color
-                    headerTitleStyle: {
-                        fontWeight: 'bold', //Set Header text style
-                    },
-                }}
-            />
-            <Stack.Screen
                 name="RestaurantScreen"
                 component={RestaurantScreen}
                 options={{
@@ -122,7 +103,7 @@ function dashboardScreenStack({ navigation }) {
                 name="RestaurantScreenFromCities"
                 component={RestaurantFromCities}
                 options={{
-                    title: '', //Set Header Title
+                    title: 'Restaurants', //Set Header Title
                     headerLeft: () => (
                         <Ionicons name="arrow-back" size={35} color="white"
                             style={{ margin: 10 }} onPress={() => navigation.goBack()}
@@ -330,7 +311,7 @@ function dashboardScreenStack({ navigation }) {
         </Stack.Navigator>
     );
 }
-function AccountSettingScreenStack({ navigation }) {
+function ProfileScreenStack({ navigation }) {
     return (
         <Stack.Navigator initialRouteName="Profile">
             <Stack.Screen
@@ -339,7 +320,7 @@ function AccountSettingScreenStack({ navigation }) {
                 options={{
                     title: 'Profile', //Set Header Title
                     headerLeft: () => (
-                        <Ionicons name="arrow-back" size={40} color="white"
+                        <AntDesign name="close" size={30} color="white"
                             style={{ margin: 10 }} onPress={() => navigation.goBack()}
                         />
                     ),
@@ -380,17 +361,6 @@ function ApplicationSettingScreenStack({ navigation }) {
         </Stack.Navigator>
     );
 }
-function Suggestions({ navigation }) {
-    return (
-        <Stack.Navigator initialRouteName="Suggestions">
-            <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ headerShown: false }}
-            />
-        </Stack.Navigator>
-    );
-}
 
 function LanguageScreenStack({ navigation }) {
     return (
@@ -399,7 +369,7 @@ function LanguageScreenStack({ navigation }) {
                 name="Language"
                 component={Languages}
                 options={{
-                    title: 'Select Languages', 
+                    title: 'Select Languages',
                     headerLeft: () => (
                         <Ionicons name="arrow-back" size={40} color="white"
                             style={{ margin: 10 }} onPress={() => navigation.goBack()}
@@ -437,11 +407,11 @@ const DrawerNavigator = ({ route }) => {
                 component={dashboardScreenStack}
                 options={{
                     title: 'Home',
-                    drawerIcon: () => {
+                    drawerIcon: () => (
                         <Ionicons
-                            name='md-home-outline' size={20} color={Colors.primary}
+                            name='md-home-outline' size={24} color={Colors.primary}
                         />
-                    }
+                    )
                 }}
             />
             <Drawer.Screen
@@ -450,68 +420,35 @@ const DrawerNavigator = ({ route }) => {
                 component={LanguageScreenStack}
                 options={{
                     title: 'Select Languages',
-                    drawerIcon: () => {
-                        <Ionicons
-                            name='md-home-outline' size={20} color={Colors.primary}
-                        />
-                    }
+                    drawerIcon: () => (
+                        <FontAwesome name="language" size={24} color={Colors.primary} />
+                    )
                 }}
             />
             <Drawer.Screen
-                name="Suggestions"
-                options={{ drawerLabel: 'Suggestions' }}
-                component={Suggestions}
+                name="Profile"
+                options={{ drawerLabel: 'Profile' }}
+                component={ProfileScreenStack}
                 options={{
-                    title: 'Suggestions',
-                    drawerIcon: () => {
-                        <Ionicons
-                            name='md-home-outline' size={20} color={Colors.primary}
-                        />
-                    }
-                }}
-            />
-            <Drawer.Screen
-                name="Account Setting"
-                options={{ drawerLabel: 'Account Setting' }}
-                component={AccountSettingScreenStack}
-                options={{
-                    title: 'Account Setting',
-                    drawerIcon: () => {
-                        <Ionicons
-                            name='md-home-outline' size={20} color={Colors.primary}
-                        />
-                    }
+                    title: 'Profile',
+                    drawerIcon: () => (
+                        <FontAwesome5 name="user" size={24} color={Colors.primary} />
+                    )
                 }}
             />
             <Drawer.Screen
                 name="Application Setting"
-                options={{ drawerLabel: 'Application Setting' }}
+                options={{ drawerLabel: 'Settings' }}
                 component={ApplicationSettingScreenStack}
                 options={{
-                    title: 'Application Setting',
-                    drawerIcon: () => {
+                    title: 'Settings',
+                    drawerIcon: () => (
                         <Ionicons
-                            name='md-home-outline' size={20} color={Colors.primary}
+                            name='settings-outline' size={24} color={Colors.primary}
                         />
-                    }
+                    )
                 }}
             />
-            {/*
-            <Drawer.Screen
-                name="RestaurantView"
-                options={{ drawerLabel: '' }}
-                component={RestaurantView}
-            />
-            <Drawer.Screen
-                name="CameraScreen"
-                options={{ drawerLabel: '' }}
-                component={CameraScreen}
-            />
-            <Drawer.Screen
-                name="FoodDetail"
-                options={{ drawerLabel: '' }}
-                component={FoodDetail}
-            /> */}
         </Drawer.Navigator>
     )
 }

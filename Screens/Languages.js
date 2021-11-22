@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Alert, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { LanguageContext } from '../LanguageContext';
 
 import { AntDesign } from '@expo/vector-icons';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Colors from '../constants/Colors';
 import LanguageText from '../components/LanguageText';
@@ -32,9 +34,15 @@ const Languages = ({ navigation }) => {
         },
     ];
 
-    const languageHandler = (languageCode) => {
-        setContext(languageCode)
-        Alert.alert('', 'Language has been Updated')
+    const languageHandler = async (languageCode) => {
+        try{
+            await AsyncStorage.setItem('langCode', languageCode)
+            .then(setContext(languageCode))
+            .then(Alert.alert('','Language has been updated!'))
+        }
+        catch (error) {
+            Alert.alert('','Language cannot be updated!');
+        }
     }
     return (
         <View style={styles.container}>

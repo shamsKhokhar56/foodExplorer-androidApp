@@ -12,7 +12,6 @@ import Card from '../components/Card';
 
 import Colors from '../constants/Colors';
 import building from '../data/BuildMuscles';
-;
 import LanguageText from '../components/LanguageText';
 
 
@@ -121,12 +120,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: Colors.backgroundGrey
-    },
-    scrollViewStyles: {
-        flex: 1,
-        height: '100%',
-        justifyContent: 'center'
     },
     cardStyles: {
         height: 150,

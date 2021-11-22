@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground, TouchableHighlight, ScrollView, Dimensions } from 'react-native';
-import { LanguageContext } from '../LanguageContext';
+import { StyleSheet, View, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,6 +8,7 @@ import Colors from '../constants/Colors';
 import LanguageText from '../components/LanguageText';
 
 const Dashboard = ({ navigation }) => {
+
     return (
         <View style={styles.screen}>
             <View style={styles.dashboardItems}>
@@ -16,7 +16,7 @@ const Dashboard = ({ navigation }) => {
                     <View style={styles.dashboardItemsViewLower}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('RestaurantScreen',
-                                { city: 'Islamabad' }
+                                { city: 'Karachi' }
                             )}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/Restaurant1.jpg')}>
                                     <LanguageText styles={styles.textStyles} value={'restaurant'} />

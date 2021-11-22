@@ -81,7 +81,7 @@ const RestaurantFromCities = ({ navigation, route }) => {
                                                 <Image style={styles.imageStyles} source={{ uri: item.restaurantImage }} />
                                                 <View style={styles.restaurantDetails}>
                                                     <Text style={styles.textStyles}>
-                                                        {item.restaurantId} {'  '} {item.restaurantName}
+                                                        {item.restaurantName}
                                                     </Text>
                                                     <View style={styles.ratingStyles}>
                                                         <Entypo name="star" size={20} color={Colors.primary} />
@@ -97,53 +97,6 @@ const RestaurantFromCities = ({ navigation, route }) => {
                             }
                         }}
                     />
-                    // <ScrollView>
-                    //     {Restaurant.map(
-                    //         (item) => {
-                    //             if (item.city === cityName) {
-                    //                 if (item.restaurantName.toLowerCase().includes(search.toLowerCase()) || search == '') {
-                    //                     return (
-                    //                         <View style={styles.restaurantView} key={item.restaurantId}>
-                    //                             <TouchableHighlight activeOpacity={0.6} underlayColor={'white'}
-                    //                                 onPress={() => {
-                    //                                     navigation.navigate('RestaurantDetail', {
-                    //                                         restId: item.restaurantId,
-                    //                                         name: item.restaurantName,
-                    //                                         linkNumber: item.linkNumber,
-                    //                                         cityCode: item.cityCode,
-                    //                                         rating: item.restaurantRating,
-                    //                                         openTime: item.openingTime,
-                    //                                         closeTime: item.closingTime,
-                    //                                         address: item.restaurantAddress,
-                    //                                         latitude: item.latitude,
-                    //                                         longitude: item.longitude,
-                    //                                         image: item.restaurantImage,
-                    //                                         city: item.city
-
-                    //                                     })
-                    //                                 }}>
-                    //                                 <View>
-                    //                                     <Image style={styles.imageStyles} source={{ uri: item.restaurantImage }} />
-                    //                                     <View style={styles.restaurantDetails}>
-                    //                                         <Text style={styles.textStyles}>
-                    //                                             {item.restaurantName}
-                    //                                         </Text>
-                    //                                         <View style={styles.ratingStyles}>
-                    //                                             <Entypo name="star" size={20} color={Colors.primary} />
-                    //                                             <Text style={styles.textStyles}>
-                    //                                                 {item.restaurantRating.slice(0, -5)}
-                    //                                             </Text>
-                    //                                         </View>
-                    //                                     </View>
-                    //                                 </View>
-                    //                             </TouchableHighlight>
-                    //                         </View>
-                    //                     )
-                    //                 }
-                    //             }
-                    //         }
-                    //     )}
-                    // </ScrollView>
                 )
             }
         </View>

@@ -5,21 +5,27 @@ import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 
 import { Entypo } from '@expo/vector-icons';
 
+import firebase from '../Firebase/fire';
+
 import Colors from '../constants/Colors';
 
 import Food from '../data/Food';
 import PostReviewForm from './PostReviewForm';
 import DisplayReviews from '../components/DisplayReviews';
 import LanguageText from '../components/LanguageText';
+import Loading from '../components/Loading';
 
 const RestaurantDetail = ({ navigation, route }) => {
 
+    
+    const [foodData, setFoodData] = useState();
     const [food, setFood] = useState(true)
     const [about, setAbout] = useState(false)
     const [showReview, setShowReview] = useState(false)
     const [postReview, setPostReview] = useState(false)
     const [review, setReview] = useState('')
     const [defaultRating, setDefaultRating] = useState(0)
+    const [loading, setLoading] = useState(true)
 
     const restId = route.params.restId
     const name = route.params.name
@@ -33,6 +39,23 @@ const RestaurantDetail = ({ navigation, route }) => {
     // const longitude = route.params.longitude
     const image = route.params.image
     const city = route.params.city
+
+    const getData = async () => {
+        const ref = firebase.firestore().collection(`Food${city}`)
+        await ref.get().then((item) => {
+            const items = item.docs.map((doc) => doc.data());
+            setFoodData(items);
+            setLoading(false);
+        })
+
+    }
+    useEffect(() => {
+        getData();
+    }, []);
+
+
+
+
 
     const handleStates = (value) => {
         if (value === 'food') {
@@ -93,17 +116,17 @@ const RestaurantDetail = ({ navigation, route }) => {
                     <LanguageText styles={styles.buttonText} value={'reviews'} />
                 </TouchableHighlight>
             </View>
+            <LanguageText
+                styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
+                value={'foodItems'}
+            />
             {
-                food ? (
+                loading ? (<Loading />) :  food ? (
                     <View>
-                        <LanguageText
-                            styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
-                            value={'foodItems'}
-                        />
-                        {Food.map(item => {
-                            if (item.restaurantID === restId) {
+                        {foodData.map(item => {
+                            if (item.restaurantId === restId) {
                                 return (
-                                    <View style={styles.foodView} key={item.foodID}>
+                                    <View style={styles.foodView} key={item.foodId}>
                                         <View stlye={styles.childView}>
                                             <Image style={styles.foodImageStyles} source={{ uri: item.foodImage }} />
                                         </View>

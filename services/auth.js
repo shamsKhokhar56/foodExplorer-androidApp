@@ -44,6 +44,32 @@ const signIn = (email, password) => {
     )
 }
 
+const reauthenticate = (currentPass) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+        user.email, currentPass);
+    return user.reauthenticateWithCredential(cred);
+}
+
+
+const changePassword = (currentPass, newPass, newPass2) => {
+    if (!currentPass || !newPass || !newPass2) {
+        Alert.alert("Error", "Please enter all fields to update password")
+        return
+    }
+    if (newPass === newPass2 && newPass != '' && newPass2 != '' && currentPass) {
+        reauthenticate(currentPass).then(() => {
+            var user = firebase.auth().currentUser;
+            user.updatePassword(newPass).then(() => {
+                Alert.alert('Password Updated', 'Passowrd has been updated succesfully');
+                setCurrentPass('')
+                setNewPass('')
+                setNewPass2('')
+            }).catch((error) => { Alert.alert('Error!', error.message); });
+        }).catch((error) => { Alert.alert('Error!', error.message); });
+    }
+}
+
 
 
 const logout = () => {
@@ -53,6 +79,7 @@ const Auth = {
     signUp,
     signIn,
     logout,
+    changePassword
 }
 
 export default Auth;
