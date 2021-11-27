@@ -47,7 +47,9 @@ const WorkoutTypes = ({ route, navigation }) => {
                                         })
                                     }
                                     }>
-                                    <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
+                                    <ImageBackground style={styles.imageStyle} source={item.image}>
+                                        <LanguageText styles={styles.innerTextStyles} value={`${item.name}`} />
+                                    </ImageBackground>
                                 </TouchableHighlight>
                             </Card>
                         )

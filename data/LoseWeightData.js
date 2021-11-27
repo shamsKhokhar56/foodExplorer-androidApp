@@ -11,8 +11,7 @@ const LoseWeight = [
                     1: '1: 50 Reps',
                 },
                 image1: require('../assets/jumpingJacks.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'jumpingJacksHowToDo',
 
             },
             {
@@ -22,8 +21,7 @@ const LoseWeight = [
                     1: '1: 30 Reps',
                 },
                 image1: require('../assets/toeToucherCrunches.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'toeToucherCrunchesHowToDo',
 
             },
             {
@@ -33,8 +31,7 @@ const LoseWeight = [
                     1: '1: 20 Reps',
                 },
                 image1: require('../assets/squats.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'squatsHowToDo',
 
             },
             {
@@ -44,8 +41,7 @@ const LoseWeight = [
                     1: '1: 30 Reps',
                 },
                 image1: require('../assets/highKnees.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'highKneesHowToDo',
 
             },
         ]
@@ -62,8 +58,7 @@ const LoseWeight = [
                     1: 'Hold the position for 1 min.',
                 },
                 image1: require('../assets/plank.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'plankHowToDo',
 
             },
             {
@@ -73,8 +68,7 @@ const LoseWeight = [
                     1: '1: 30 Reps',
                 },
                 image1: require('../assets/bicycleCrunches.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'bicycleCrunchesHowToDo',
 
             },
             {
@@ -84,8 +78,7 @@ const LoseWeight = [
                     1: '1: 20 Reps',
                 },
                 image1: require('../assets/lyingLegRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'lyingLegRaiseHowToDo',
 
             },
             {
@@ -95,8 +88,7 @@ const LoseWeight = [
                     1: '1: 20 Reps',
                 },
                 image1: require('../assets/V-UpRaps.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'vUpRapsHowToDo',
 
             },
         ]
@@ -113,8 +105,7 @@ const LoseWeight = [
                     1: '20 Reps (Each Leg)',
                 },
                 image1: require('../assets/lunges.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'lungesHowToDo',
 
             },
             {
@@ -124,8 +115,7 @@ const LoseWeight = [
                     1: '1: 30 Reps',
                 },
                 image1: require('../assets/squats.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'squatsHowToDo',
 
             },
             {
@@ -135,8 +125,7 @@ const LoseWeight = [
                     1: '1: 30 Reps',
                 },
                 image1: require('../assets/sideLegRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'sideLegRaiseHowToDo',
 
             },
             {
@@ -146,8 +135,7 @@ const LoseWeight = [
                     1: '1: 40 Reps',
                 },
                 image1: require('../assets/donkeyCalfRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'donkeyCalfRaiseHowToDo',
 
             },
         ]
@@ -164,19 +152,17 @@ const LoseWeight = [
                     1: '20 Reps (Each Leg)',
                 },
                 image1: require('../assets/pushUps.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'pushUpsHowToDo',
 
             },
             { 
                 id: '2',
-                catName: 'dips',
+                catName: 'tricepsDips',
                 circuit: {
                     1: '1: 20 Reps',
                 },
                 image1: require('../assets/tricepsDips.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'tricepsDipsHowToDo',
 
             },
             {
@@ -186,19 +172,17 @@ const LoseWeight = [
                     1: '1: 15 Reps',
                 },
                 image1: require('../assets/declinePushUps.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'declinePushUpHowToDo',
 
             },
             {
                 id: '4',
-                catName: 'dips',
+                catName: 'tricepsdips',
                 circuit: {
                     1: '1: 16 Reps',
                 },
                 image1: require('../assets/tricepsDips.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'tricepsDipsHowToDo',
 
             },
         ]

@@ -3,22 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet, Text } from 'react-native';
 
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-
-import firebase from '../Firebase/fire';
 import Colors from '../constants/Colors';
 
 const CustomSidebarMenu = ({ ...props }) => {
-    const [userName, setUserName] = useState('')
-    var uid = ''
-    useEffect(() => {
-        getUserData()
-    }, [userName])
-
-    const getUserData = async () => {
-        uid = await firebase.auth().currentUser.uid
-        await firebase.firestore().collection('User').doc(uid).get()
-            .then(snapshot => setUserName(snapshot.data().UserName))
-    }
     return (
         <SafeAreaView style={{ flex: 1, marginTop: 60 }}>
             <View style={styles.topView}>
@@ -29,7 +16,6 @@ const CustomSidebarMenu = ({ ...props }) => {
                 </View>
                 <View style={styles.bottomView}>
                     <Text style={{ fontSize: 20, textAlign: 'center' }}>
-                        Welcome, {userName}
                     </Text>
                 </View>
             </View>

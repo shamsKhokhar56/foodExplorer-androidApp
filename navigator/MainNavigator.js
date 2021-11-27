@@ -30,6 +30,7 @@ import CitiesScreen from '../Screens/CitiesScreen';
 import ResultScreen from '../Screens/ResultScreen';
 import Auth from '../services/auth';
 import Languages from '../Screens/Languages';
+import WorkoutInstructions from '../Screens/WorkoutInstructions';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -254,6 +255,25 @@ function dashboardScreenStack({ navigation }) {
             <Stack.Screen
                 name="WorkoutDetail"
                 component={WorkoutDetail}
+                options={{
+                    title: 'Workout Detail', //Set Header Title
+                    headerLeft: () => (
+                        <Ionicons name="arrow-back" size={35} color="white"
+                            style={{ margin: 10 }} onPress={() => navigation.goBack()}
+                        />
+                    ),
+                    headerStyle: {
+                        backgroundColor: Colors.primary, //Set Header color
+                    },
+                    headerTintColor: '#fff', //Set Header text color
+                    headerTitleStyle: {
+                        fontWeight: 'bold', //Set Header text style
+                    },
+                }}
+            />
+            <Stack.Screen
+                name="WorkoutInstructions"
+                component={WorkoutInstructions}
                 options={{
                     title: 'Workout Detail', //Set Header Title
                     headerLeft: () => (

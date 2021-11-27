@@ -12,8 +12,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/jumpSquat.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'squatJumpsHowToDo',
 
             },
             {
@@ -24,8 +23,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/smithMachineCalfRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'smithMachineCalfRaiseHowToDo',
 
             },
             {
@@ -36,8 +34,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/splitSquat.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'splitSquatsHowToDo',
 
             },
             {
@@ -48,8 +45,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/lunges.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'lungesHowToDo',
 
             },
         ]
@@ -67,8 +63,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/shoulderBarbellPress.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'barbellShoulderPressHowToDo',
 
             },
             {
@@ -79,8 +74,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/shrugs.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'shrugsHowToDo',
 
             },
             {
@@ -91,8 +85,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/lateralRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'laiteralRaiseHowToDo',
 
             },
         ]
@@ -110,8 +103,7 @@ const building = [
                     2: '2: 8 Reps',
                 },
                 image1: require('../assets/pullUps.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'pullupsHowToDo',
 
             },
             {
@@ -122,8 +114,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/hammerCurls.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'hammerCurlsHowToDo',
 
             },
             {
@@ -134,8 +125,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/barbellCurls.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'barbellCurlsHowToDo',
 
             },
             {
@@ -146,8 +136,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/barPreacherCurls.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'barPreacherCurlsHowToDo',
 
             },
         ]
@@ -165,8 +154,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/lyingTricepsExtension.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'lyingTricepsExtensionHowToDo',
 
             },
             {
@@ -177,8 +165,7 @@ const building = [
                     2: '2: 14 Reps',
                 },
                 image1: require('../assets/tricepsDips.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'benchDipsHowToDo',
 
             },
             {
@@ -189,8 +176,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/closeGripEZBarBenchPress.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'closeGripBarHowToDo',
 
             },
             {
@@ -200,9 +186,8 @@ const building = [
                     1: '1: 10 Reps',
                     2: '2: 14 Reps',
                 },
-                image1: require('../assets/tricepDipsMachine.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                image1: require('../assets/tricepDips.jpg'),
+                howToDo: 'tricepsDipsHowToDo',
 
             },
         ]
@@ -220,8 +205,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/swissBallCrunches.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'swissBallCrunchesHowToDo',
 
             },
             {
@@ -232,8 +216,7 @@ const building = [
                     2: '2: Hold the Position for 1 min',
                 },
                 image1: require('../assets/plank.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'plankHowToDo',
 
             },
             {
@@ -244,8 +227,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/bicycleCrunches.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'bicycleCrunchesHowToDo',
 
             },
             {
@@ -256,8 +238,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/lyingLegRaise.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'lyingLegRaiseHowToDo',
 
             },
             {
@@ -268,8 +249,7 @@ const building = [
                     2: '2: 14 Reps',
                 },
                 image1: require('../assets/declineObligueCrunches.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'declieObliqueCrunchesHowToDo',
 
             },
         ]
@@ -287,8 +267,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/dumbellBentOver.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'dumbellBentOverHowToDo',
 
             },
             {
@@ -299,8 +278,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/deadLift.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'deadLiftHowToDo',
 
             },
             {
@@ -311,8 +289,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/hyperExtension.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'hyperExtensionHowToDo',
 
             },
         ]
@@ -330,8 +307,7 @@ const building = [
                     2: '2: 10 Reps',
                 },
                 image1: require('../assets/plainBenchBarbellPress.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'plainBenchBarbellPressHowToDo',
 
             },
             {
@@ -342,8 +318,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/inclineBenchDumbellPress.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'inclineBenchDumbellPressHowToDo',
 
             },
             {
@@ -354,8 +329,7 @@ const building = [
                     2: '2: 12 Reps',
                 },
                 image1: require('../assets/pushUps.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'pushUpsHowToDo',
 
             },
             {
@@ -366,8 +340,7 @@ const building = [
                     2: '2: 14 Reps',
                 },
                 image1: require('../assets/butterfly.jpg'),
-                image2: '2',
-                howToDo: 'This is the way'
+                howToDo: 'butterflyHowToDo',
 
             },
         ]

@@ -1,21 +1,14 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import DietPlansData from '../data/DietPlansData';
+import React, { useState } from 'react'
+import { Alert, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 
 import Colors from '../constants/Colors';
 
-import { useContext } from 'react';
-import i18n from 'i18n-js';
-import { LanguageContext } from '../LanguageContext';
-import translations from '../services/translations';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import LanguageText from '../components/LanguageText';
 
 const DietPlansDetailsView = ({ navigation, route }) => {
+
     const id = route.params.id
-    const { context, setContext } = useContext(LanguageContext);
-    i18n.locale = context
-    i18n.fallbacks = true;
-    i18n.translations = translations
     var name = 'name'
     if (id === 0) {
         name = 'NormalWeight'
@@ -27,450 +20,101 @@ const DietPlansDetailsView = ({ navigation, route }) => {
         name = 'OverWeight'
     }
 
+    const weekdays = [
+        { id: '1', dayName: 'monday', },
+        { id: '2', dayName: 'tuesday', },
+        { id: '3', dayName: 'wednesday', },
+        { id: '4', dayName: 'thursday', },
+        { id: '5', dayName: 'friday', },
+        { id: '6', dayName: 'saturday', },
+        { id: '7', dayName: 'sunday' },
+    ]
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = async () => {
+        setIsEnabled(isEnabled => !isEnabled);
+        try {
+            await AsyncStorage.setItem('notification', JSON.stringify(isEnabled))
+            if (!isEnabled) {
+                console.log('turned on notifications')
+            }
+            else {
+                console.log('turned off notifications')
+            }
+        }
+        catch (error) {
+            Alert.alert('', 'Notifications settings cannot be updated!');
+        }
+    }
+
     return (
         <View style={styles.screen}>
+            <View style={styles.notificationStyles}>
+                <Text style={styles.textStyles2}>
+                    Notifications for daily diet
+                </Text>
+                <Switch
+                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    thumbColor={isEnabled ? "#81b0ff" : "#f4f3f4"}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                />
+            </View>
             <ScrollView>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'sunday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')} {i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`sundayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')} {i18n.t(`snackTime${name}`)}
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`sundaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')} {i18n.t(`lunchTime${name}`)}
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`sundayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')} {i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`sundayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')} {i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`sundayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'monday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')} {i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`mondayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`mondaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`mondayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`mondayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`mondayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'tuesday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`tuesdayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`tuesdaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`tuesdayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`tuesdayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`tuesdayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'wednesday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`wednesdayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`wednesdaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`wednesdayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`wednesdayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`wednesdayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'thursday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`thursdayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`thursdaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`thursdayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`thursdayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`thursdayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'friday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`fridayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`fridaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`fridayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`fridayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`fridayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dayView}>
-                    <LanguageText styles={styles.dayText} value={'saturday'} />
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('breakfast')}{i18n.t(`breakfastTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`saturdayBreakfast${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('midMeal')}{i18n.t(`snackTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`saturdaySnack${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('lunch')}{i18n.t(`lunchTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`saturdayLunch${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('evening')}{i18n.t(`eveningTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`saturdayEvening${name}`)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.dietPlanView}>
-                    <View style={styles.timeView}>
-                        <Text style={[styles.textStyles2]}>
-                            {i18n.t('dinner')}{i18n.t(`dinnerTime${name}`)}:
-                        </Text>
-                    </View>
-                    <View style={styles.mealView}>
-                        <Text style={styles.textStyles}>
-                            {i18n.t(`saturdayDinner${name}`)}
-                        </Text>
-                    </View>
-                </View>
+                {weekdays.map((item) => {
+                    return (
+                        <View key={item.id}>
+                            <View style={styles.dayView}>
+                                <LanguageText styles={styles.dayText} value={item.dayName} />
+                            </View>
+                            <View style={styles.dietPlanView}>
+                                <View style={styles.timeView}>
+                                    <LanguageText styles={styles.textStyles2} value={'breakfast'} />
+                                    <LanguageText styles={styles.textStyles2} value={`breakfastTime${name}`} />
+                                </View>
+                                <View style={styles.mealView}>
+                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Breakfast${name}`} />
+                                </View>
+                            </View>
+                            <View style={styles.dietPlanView}>
+                                <View style={styles.timeView}>
+                                    <LanguageText styles={styles.textStyles2} value={'midMeal'} />
+                                    <LanguageText styles={styles.textStyles2} value={`snackTime${name}`} />
+                                </View>
+                                <View style={styles.mealView}>
+                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Snack${name}`} />
+                                </View>
+                            </View>
+                            <View style={styles.dietPlanView}>
+                                <View style={styles.timeView}>
+                                    <LanguageText styles={styles.textStyles2} value={'lunch'} />
+                                    <LanguageText styles={styles.textStyles2} value={`lunchTime${name}`} />
+                                </View>
+                                <View style={styles.mealView}>
+                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Lunch${name}`} />
+                                </View>
+                            </View>
+                            <View style={styles.dietPlanView}>
+                                <View style={styles.timeView}>
+                                    <LanguageText styles={styles.textStyles2} value={'evening'} />
+                                    <LanguageText styles={styles.textStyles2} value={`eveningTime${name}`} />
+                                </View>
+                                <View style={styles.mealView}>
+                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Evening${name}`} />
+                                </View>
+                            </View>
+                            <View style={styles.dietPlanView}>
+                                <View style={styles.timeView}>
+                                    <LanguageText styles={styles.textStyles2} value={'dinner'} />
+                                    <LanguageText styles={styles.textStyles2} value={`dinnerTime${name}`} />
+                                </View>
+                                <View style={styles.mealView}>
+                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Dinner${name}`} />
+                                </View>
+                            </View>
+                        </View>
+                    )
+                })}
             </ScrollView>
         </View>
     )
@@ -479,6 +123,12 @@ const DietPlansDetailsView = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+    },
+    notificationStyles: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        padding: 5,
+        alignItems: 'center'
     },
     dayView: {
         justifyContent: 'center',
@@ -493,6 +143,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     timeView: {
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '22%',
         borderRightWidth: 1,
         borderRightColor: 'black',
@@ -517,7 +169,7 @@ const styles = StyleSheet.create({
     },
     textStyles2: {
         fontSize: 18,
-        textAlign: 'justify',
+        textAlign: 'center',
         fontWeight: 'bold'
     },
     headingTextStyles: {

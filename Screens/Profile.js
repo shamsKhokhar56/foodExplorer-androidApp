@@ -42,7 +42,7 @@ const Profile = () => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+        <ScrollView contentContainerStyle={styles.contentContainer} keyboardShouldPersistTaps={'always'}>
             <View style={styles.container} >
                 <View style={styles.headingView}>
                     <Text style={styles.headingText}>

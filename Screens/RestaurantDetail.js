@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, FlatList, TouchableHighlight, Image, ScrollView, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Dimensions, FlatList, TouchableHighlight, Image, ScrollView, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 
 import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 
@@ -9,7 +9,6 @@ import firebase from '../Firebase/fire';
 
 import Colors from '../constants/Colors';
 
-import Food from '../data/Food';
 import PostReviewForm from './PostReviewForm';
 import DisplayReviews from '../components/DisplayReviews';
 import LanguageText from '../components/LanguageText';
@@ -17,8 +16,9 @@ import Loading from '../components/Loading';
 
 const RestaurantDetail = ({ navigation, route }) => {
 
-    
+
     const [foodData, setFoodData] = useState();
+
     const [food, setFood] = useState(true)
     const [about, setAbout] = useState(false)
     const [showReview, setShowReview] = useState(false)
@@ -47,11 +47,10 @@ const RestaurantDetail = ({ navigation, route }) => {
             setFoodData(items);
             setLoading(false);
         })
-
     }
     useEffect(() => {
         getData();
-    }, []);
+    }, [review]);
 
 
 
@@ -74,13 +73,47 @@ const RestaurantDetail = ({ navigation, route }) => {
             setShowReview(true)
         }
     }
+    const getDate = () => {
+        const today = new Date()
+        const date = today.getDate()
+        const month = today.getMonth()
+        const year = today.getFullYear()
+        return `${date}-${month}-${year}`
+    }
 
-    const postHandler = () => {
-        //Post Review function here
+    const postHandler = async () => {
+
+        const userName = await firebase.auth().currentUser.displayName
+        const data = {
+            city: city,
+            cityCode: restId.slice(0, 1),
+            linkNumber: restId.substring(1),
+            restaurantId: restId,
+            reviewAt: getDate(),
+            reviewBy: userName,
+            reviewDescription: review,
+            reviewRating: `${defaultRating}/5 Stars`
+        }
+        const ref = firebase.firestore().collection(`Review${city}`).doc()
+        const id = ref.id
+        return (
+            await firebase.firestore().collection(`Review${city}`).doc().set({
+                city: city,
+                cityCode: restId.slice(0, 1),
+                linkNumber: restId.substring(1),
+                restaurantId: restId,
+                reviewAt: getDate(),
+                reviewBy: userName,
+                reviewDescription: review,
+                reviewId: id,
+                reviewRating: `${defaultRating}/5 Stars`
+            })
+                .then(() => Alert.alert('Review posted', 'Review has been posted succesfully'))
+        )
     }
 
     return (
-        <ScrollView style={styles.screen}>
+        <ScrollView style={styles.screen} keyboardShouldPersistTaps={'always'}>
             <Image style={styles.imageStyles} source={{ uri: image }} />
             <View style={styles.restaurantDetails}>
                 <Text style={styles.textStyles}>
@@ -116,13 +149,13 @@ const RestaurantDetail = ({ navigation, route }) => {
                     <LanguageText styles={styles.buttonText} value={'reviews'} />
                 </TouchableHighlight>
             </View>
-            <LanguageText
-                styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
-                value={'foodItems'}
-            />
             {
-                loading ? (<Loading />) :  food ? (
+                loading ? (<Loading />) : food ? (
                     <View>
+                        <LanguageText
+                            styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
+                            value={'foodItems'}
+                        />
                         {foodData.map(item => {
                             if (item.restaurantId === restId) {
                                 return (
@@ -166,13 +199,16 @@ const RestaurantDetail = ({ navigation, route }) => {
                                 </View>
                             ) : (
                                 <View style={styles.postReviewView}>
-                                    <TouchableHighlight style={styles.postReviewButton} onPress={() => setPostReview(true)}>
+                                    <TouchableHighlight
+                                        underlayColor="none" style={styles.postReviewButton}
+                                        onPress={() => setPostReview(true)}
+                                    >
                                         <LanguageText styles={styles.buttonText} value={'postReview'} />
                                     </TouchableHighlight>
                                 </View>
                             )
                         }
-                        <DisplayReviews restId={restId} />
+                        <DisplayReviews restId={restId} cityName={city} />
                     </View>
                 ) : (
                     <View>

@@ -6,26 +6,27 @@ import firebase from '../Firebase/fire';
 import { Entypo } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
-import Reviews from '../data/Review';
 import Loading from './Loading';
 
 const DisplayReviews = (props) => {
     const restId = props.restId
-    const [reviews, setReviews] = useState();
-    const [loading, setLoading] = useState(false)
+    const city = props.cityName
+    const [reviewsData, setReviewsData] = useState();
 
-    // const getData = async () => {
-    //     const ref = firebase.firestore().collection('Review')
-    //     await ref.get().then((item) => {
-    //         const items = item.docs.map((doc) => doc.data());
-    //         setReviews(items);
-    //         setLoading(false);
-    //     })
+    const [loading, setLoading] = useState(true)
 
-    // }
-    // useEffect(() => {
-    //     getData();
-    // }, [reviews]);
+    const getData = async () => {
+        const ref = firebase.firestore().collection(`Review${city}`)
+        await ref.get().then((item) => {
+            const items = item.docs.map((doc) => doc.data());
+            setReviewsData(items);
+            setLoading(false);
+        })
+
+    }
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <View>
@@ -34,10 +35,10 @@ const DisplayReviews = (props) => {
                     <Loading/>
                 ) : (
                     <View>
-                        {Reviews.map(item => {
-                            if (item.restaurantID === restId) {
+                        {reviewsData.map(item => {
+                            if (item.restaurantId === restId) {
                                 return (
-                                    <View style={styles.reviewView} key={item.reviewID} >
+                                    <View style={styles.reviewView} key={item.reviewId} >
                                         <View style={styles.leftSide}>
                                             <Text>
                                                 {item.reviewBy}

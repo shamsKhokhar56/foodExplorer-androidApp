@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import homeBasedWorkout from '../data/HomeBasedWorkoutData';
 import LoseWeight from '../data/LoseWeightData';
@@ -7,19 +7,11 @@ import LoseWeight from '../data/LoseWeightData';
 import Colors from '../constants/Colors';
 import building from '../data/BuildMuscles';
 
-import i18n from 'i18n-js';
-import { LanguageContext } from '../LanguageContext';
-import translations from '../services/translations';
 import LanguageText from '../components/LanguageText';
 
 const WorkoutDetail = ({ navigation, route }) => {
     const typeName = route.params.workName
     const id = route.params.id
-
-    const { context, setContext } = useContext(LanguageContext);
-    i18n.locale = context
-    i18n.fallbacks = true;
-    i18n.translations = translations
 
     if (typeName === "Home Based Workout") {
         return (
@@ -34,19 +26,27 @@ const WorkoutDetail = ({ navigation, route }) => {
                     {homeBasedWorkout[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
-                                <Text style={styles.textStyles}>
-                                    {item.id}. <LanguageText value={`${item.catName}`} />
-                                </Text>
-                                <Image style={styles.imageStyles} source={item.image1} />
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[1]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[2]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[3]}
-                                </Text>
+                                <TouchableHighlight underlayColor="none" onPress={() => {
+                                    navigation.navigate('WorkoutInstructions', {
+                                        catName: item.catName, image: item.image1
+                                    })
+                                }}>
+                                    <View>
+                                        <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
+                                            {item.id}. <LanguageText value={`${item.catName}`} />
+                                        </Text>
+                                        <Image style={styles.imageStyles} source={item.image1} />
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            {item.circuit[1]}
+                                        </Text>
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            {item.circuit[2]}
+                                        </Text>
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            {item.circuit[3]}
+                                        </Text>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
                         )
                     })}
@@ -68,16 +68,24 @@ const WorkoutDetail = ({ navigation, route }) => {
                     {LoseWeight[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
-                                <Text style={styles.textStyles}>
-                                    {item.id}. <LanguageText value={`${item.catName}`} />
-                                </Text>
-                                <Image style={styles.imageStyles} source={item.image1} />
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    <LanguageText value={'circuit'} /> {item.circuit[1]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {item.circuit[3]}
-                                </Text>
+                                <TouchableHighlight underlayColor="none" onPress={() => {
+                                    navigation.navigate('WorkoutInstructions', {
+                                        catName: item.catName, image: item.image1
+                                    })
+                                }}>
+                                    <View>
+                                        <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
+                                            {item.id}. <LanguageText value={`${item.catName}`} />
+                                        </Text>
+                                        <Image style={styles.imageStyles} source={item.image1} />
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            <LanguageText value={'circuit'} /> {item.circuit[1]}
+                                        </Text>
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            {item.circuit[3]}
+                                        </Text>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
                         )
                     })}
@@ -99,22 +107,30 @@ const WorkoutDetail = ({ navigation, route }) => {
                     {building[id].category.map(item => {
                         return (
                             <View key={item.id} style={styles.mainView}>
-                                <Text style={styles.textStyles}>
-                                    {item.id}. <LanguageText value={`${item.catName}`} />
-                                </Text>
-                                <Image style={styles.imageStyles} source={item.image1} />
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    <LanguageText value={'circuit'} /> {item.circuit[1]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    <LanguageText value={'circuit'} /> {item.circuit[2]}
-                                </Text>
-                                <Text style={[styles.textStyles, { fontSize: 16 }]}>
-                                    {
-                                        item.circuit[3] ? <LanguageText value={'circuit'} /> : item.circuit[3]
-                                    }
-                                    {item.circuit[3]}
-                                </Text>
+                                <TouchableHighlight underlayColor="none" onPress={() => {
+                                    navigation.navigate('WorkoutInstructions', {
+                                        catName: item.catName, image: item.image1
+                                    })
+                                }}>
+                                    <View>
+                                        <Text style={[styles.textStyles, { fontWeight: 'bold' }]}>
+                                            {item.id}. <LanguageText value={`${item.catName}`} />
+                                        </Text>
+                                        <Image style={styles.imageStyles} source={item.image1} />
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            <LanguageText value={'circuit'} /> {item.circuit[1]}
+                                        </Text>
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            <LanguageText value={'circuit'} /> {item.circuit[2]}
+                                        </Text>
+                                        <Text style={[styles.textStyles, { fontSize: 16 }]}>
+                                            {
+                                                item.circuit[3] ? <LanguageText value={'circuit'} /> : item.circuit[3]
+                                            }
+                                            {item.circuit[3]}
+                                        </Text>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
                         )
                     })}
@@ -130,14 +146,16 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         // alignItems: 'center',
-        backgroundColor: Colors.backgroundGrey
+        // backgroundColor: Colors.backgroundGrey
     },
     headingText: {
         color: 'black',
         fontSize: 22,
         backgroundColor: 'white',
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        borderBottomWidth: 3,
+        borderBottomColor: 'black'
     },
     noteText: {
         color: Colors.primary,
@@ -148,19 +166,18 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     mainView: {
-        borderBottomWidth: 1,
-        borderBottomColor: 'grey',
+        borderBottomWidth: 2,
+        borderBottomColor: 'black',
+        marginTop: 10
     },
     textStyles: {
         fontSize: 16,
         textAlign: 'center',
-        backgroundColor: 'white'
     },
 
     imageStyles: {
         width: '100%',
-        height: 250
-
+        height: 250,
     },
 
 })
