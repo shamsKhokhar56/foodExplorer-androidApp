@@ -9,6 +9,9 @@ import Login from './Screens/Login';
 import Signup from './Screens/Signup';
 import DrawerNavigator from './navigator/MainNavigator';
 import { LanguageContext } from './LanguageContext';
+import { NotificationsContext } from './NotificationsProvider';
+import App from './services/NotificationServices';
+import AsyncStorageHelper from './Helpers/AsyncStorage';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +21,7 @@ export default AppContainer = () => {
   const [user, setUser] = useState();
 
   const [context, setContext] = useState('en');
+  const [notiContext, setNotiContext] = useState()
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -35,17 +39,19 @@ export default AppContainer = () => {
   return (
     <NavigationContainer>
       <LanguageContext.Provider value={{ context, setContext }}>
-        {
-          user ?
-            <Stack.Navigator initialRouteName="DrawerNavigator">
-              <Stack.Screen options={{ headerShown: false }} name="DrawerNavigator" component={DrawerNavigator} />
-            </Stack.Navigator>
-            :
-            <Stack.Navigator initialRouteName="Login" >
-              <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-              <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
-            </Stack.Navigator>
-        }
+        <NotificationsContext.Provider value={{ notiContext, setNotiContext }}>
+          {
+            user ?
+              <Stack.Navigator initialRouteName="DrawerNavigator">
+                <Stack.Screen options={{ headerShown: false }} name="DrawerNavigator" component={DrawerNavigator} />
+              </Stack.Navigator>
+              :
+              <Stack.Navigator initialRouteName="Login" >
+                <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+                <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
+              </Stack.Navigator>
+          }
+        </NotificationsContext.Provider>
       </LanguageContext.Provider>
     </NavigationContainer>
   )

@@ -62,11 +62,23 @@ const changePassword = (currentPass, newPass, newPass2) => {
             var user = firebase.auth().currentUser;
             user.updatePassword(newPass).then(() => {
                 Alert.alert('Password Updated', 'Passowrd has been updated succesfully');
-                setCurrentPass('')
-                setNewPass('')
-                setNewPass2('')
             }).catch((error) => { Alert.alert('Error!', error.message); });
         }).catch((error) => { Alert.alert('Error!', error.message); });
+    }
+}
+
+const deleteAccount = () => {
+    const user = firebase.auth().currentUser
+    const uid = firebase.auth().currentUser.uid
+    try {
+        firebase.firestore().collection('User').doc(uid).delete()
+            .then(() => {
+                user.delete()
+                Alert.alert('Account Deleted', 'User account has been deleted')
+                logout()
+            })
+    } catch (error) {
+        (error) => { Alert.alert('Error!', error.message) }
     }
 }
 
@@ -79,7 +91,8 @@ const Auth = {
     signUp,
     signIn,
     logout,
-    changePassword
+    changePassword,
+    deleteAccount
 }
 
 export default Auth;

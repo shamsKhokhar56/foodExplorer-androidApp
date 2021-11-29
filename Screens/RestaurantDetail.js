@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, FlatList, TouchableHighlight, Image, ScrollView, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { TouchableHighlight, Image, ScrollView, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 
 import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 
 import firebase from '../Firebase/fire';
 
 import Colors from '../constants/Colors';
+import Card from '../components/Card';
 
 import PostReviewForm from './PostReviewForm';
 import DisplayReviews from '../components/DisplayReviews';
@@ -26,6 +27,7 @@ const RestaurantDetail = ({ navigation, route }) => {
     const [review, setReview] = useState('')
     const [defaultRating, setDefaultRating] = useState(0)
     const [loading, setLoading] = useState(true)
+    const [search, setSearch] = useState('')
 
     const restId = route.params.restId
     const name = route.params.name
@@ -51,10 +53,6 @@ const RestaurantDetail = ({ navigation, route }) => {
     useEffect(() => {
         getData();
     }, [review]);
-
-
-
-
 
     const handleStates = (value) => {
         if (value === 'food') {
@@ -113,117 +111,143 @@ const RestaurantDetail = ({ navigation, route }) => {
     }
 
     return (
-        <ScrollView style={styles.screen} keyboardShouldPersistTaps={'always'}>
-            <Image style={styles.imageStyles} source={{ uri: image }} />
-            <View style={styles.restaurantDetails}>
-                <Text style={styles.textStyles}>
-                    {name}
-                </Text>
-                <View style={styles.ratingStyles}>
+        <View style={styles.screen}>
+            <View>
+                {food ?
+                    <View style={styles.searchView}>
+                        <Card style={styles.searchCard}>
+                            <View style={styles.searchIcon}>
+                                <FontAwesome name="search" size={30} color={Colors.primary} />
+                            </View>
+                            <View style={styles.searchInput}>
+                                <TextInput
+                                    placeholder='Search Food'
+                                    onChangeText={text => { setSearch(text) }}
+                                    value={search}
+                                />
+                            </View>
+                            <View style={styles.crossIcon}>
+                                <TouchableHighlight underlayColor="none" onPress={() => setSearch('')}>
+                                    <Entypo name="cross" size={18} color={"#A3A8AE"} />
+                                </TouchableHighlight>
+                            </View>
+                        </Card>
+                    </View>
+                    : <View></View>}
+            </View>
+            <ScrollView keyboardShouldPersistTaps={'always'}>
+                <Image style={styles.imageStyles} source={{ uri: image }} />
+                <View style={styles.restaurantDetails}>
                     <Text style={styles.textStyles}>
-                        {rating.slice(0, -5)}
+                        {name}
                     </Text>
-                    <Entypo name="star" size={24} color={Colors.primary} />
+                    <View style={styles.ratingStyles}>
+                        <Text style={styles.textStyles}>
+                            {rating.slice(0, -5)}
+                        </Text>
+                        <Entypo name="star" size={24} color={Colors.primary} />
+                    </View>
                 </View>
-            </View>
-            <View style={styles.buttonView}>
-                <TouchableHighlight
-                    underlayColor={'white'}
-                    activeOpacity={0.4}
-                    style={food ? styles.buttonStylesTrue : styles.buttonStylesFalse}
-                    onPress={() => handleStates('food')}>
-                    <LanguageText styles={styles.buttonText} value={'food'} />
-                </TouchableHighlight>
-                <TouchableHighlight
-                    underlayColor={'white'}
-                    activeOpacity={0.4}
-                    style={about ? styles.buttonStylesTrue : styles.buttonStylesFalse}
-                    onPress={() => handleStates('about')}>
-                    <LanguageText styles={styles.buttonText} value={'about'} />
-                </TouchableHighlight>
-                <TouchableHighlight
-                    underlayColor={'white'}
-                    activeOpacity={0.4}
-                    style={showReview ? styles.buttonStylesTrue : styles.buttonStylesFalse}
-                    onPress={() => handleStates('review')}>
-                    <LanguageText styles={styles.buttonText} value={'reviews'} />
-                </TouchableHighlight>
-            </View>
-            {
-                loading ? (<Loading />) : food ? (
-                    <View>
-                        <LanguageText
-                            styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
-                            value={'foodItems'}
-                        />
-                        {foodData.map(item => {
-                            if (item.restaurantId === restId) {
-                                return (
-                                    <View style={styles.foodView} key={item.foodId}>
-                                        <View stlye={styles.childView}>
-                                            <Image style={styles.foodImageStyles} source={{ uri: item.foodImage }} />
-                                        </View>
-                                        <View style={styles.foodDetailsView}>
-                                            <View style={styles.ratingStyles}>
-                                                <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'name'} />
-                                                <Text style={styles.timeTextStyles}>
-                                                    {item.foodName}
-                                                </Text>
+                <View style={styles.buttonView}>
+                    <TouchableHighlight
+                        underlayColor={'white'}
+                        activeOpacity={0.4}
+                        style={food ? styles.buttonStylesTrue : styles.buttonStylesFalse}
+                        onPress={() => handleStates('food')}>
+                        <LanguageText styles={styles.buttonText} value={'food'} />
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        underlayColor={'white'}
+                        activeOpacity={0.4}
+                        style={about ? styles.buttonStylesTrue : styles.buttonStylesFalse}
+                        onPress={() => handleStates('about')}>
+                        <LanguageText styles={styles.buttonText} value={'about'} />
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        underlayColor={'white'}
+                        activeOpacity={0.4}
+                        style={showReview ? styles.buttonStylesTrue : styles.buttonStylesFalse}
+                        onPress={() => handleStates('review')}>
+                        <LanguageText styles={styles.buttonText} value={'reviews'} />
+                    </TouchableHighlight>
+                </View>
+                {
+                    loading ? (<Loading />) : food ? (
+                        <View>
+                            <LanguageText
+                                styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]}
+                                value={'foodItems'}
+                            />
+                            {foodData.map(item => {
+                                if (item.restaurantId === restId) {
+                                    if (item.foodName.toLowerCase().includes(search.toLowerCase()) || search == '') {
+                                        return (
+                                            <View style={styles.foodView} key={item.foodId}>
+                                                <View stlye={styles.childView}>
+                                                    <Image style={styles.foodImageStyles} source={{ uri: item.foodImage }} />
+                                                </View>
+                                                <View style={styles.foodDetailsView}>
+                                                    <View style={styles.ratingStyles}>
+                                                        <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'name'} />
+                                                        <Text style={styles.timeTextStyles}>
+                                                            {item.foodName}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ratingStyles}>
+                                                        <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'price'} />
+                                                        <Text style={styles.timeTextStyles}>
+                                                            {item.foodPrice}
+                                                        </Text>
+                                                    </View>
+                                                </View>
                                             </View>
-                                            <View style={styles.ratingStyles}>
-                                                <LanguageText styles={[styles.textStyles, { paddingHorizontal: 5 }]} value={'price'} />
-                                                <Text style={styles.timeTextStyles}>
-                                                    {item.foodPrice}
-                                                </Text>
-                                            </View>
-                                        </View>
+                                        )
+                                    }
+                                }
+                            })}
+                        </View>
+                    ) : showReview ? (
+                        <View>
+                            <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, paddingLeft: 5, fontSize: 28 }]} value={'reviews'} />
+                            {
+                                postReview ? (
+                                    <View>
+                                        <PostReviewForm
+                                            onCancel={() => setPostReview(false)}
+                                            onPost={() => postHandler()}
+                                            value={review}
+                                            setValue={setReview}
+                                            rating={defaultRating}
+                                            setRating={setDefaultRating}
+                                        />
+                                    </View>
+                                ) : (
+                                    <View style={styles.postReviewView}>
+                                        <TouchableHighlight
+                                            underlayColor="none" style={styles.postReviewButton}
+                                            onPress={() => setPostReview(true)}
+                                        >
+                                            <LanguageText styles={styles.buttonText} value={'postReview'} />
+                                        </TouchableHighlight>
                                     </View>
                                 )
                             }
-                        })}
-                    </View>
-                ) : showReview ? (
-                    <View>
-                        <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, paddingLeft: 5, fontSize: 28 }]} value={'reviews'} />
-                        {
-                            postReview ? (
-                                <View>
-                                    <PostReviewForm
-                                        onCancel={() => setPostReview(false)}
-                                        onPost={() => postHandler()}
-                                        value={review}
-                                        setValue={setReview}
-                                        rating={defaultRating}
-                                        setRating={setDefaultRating}
-                                    />
-                                </View>
-                            ) : (
-                                <View style={styles.postReviewView}>
-                                    <TouchableHighlight
-                                        underlayColor="none" style={styles.postReviewButton}
-                                        onPress={() => setPostReview(true)}
-                                    >
-                                        <LanguageText styles={styles.buttonText} value={'postReview'} />
-                                    </TouchableHighlight>
-                                </View>
-                            )
-                        }
-                        <DisplayReviews restId={restId} cityName={city} />
-                    </View>
-                ) : (
-                    <View>
-                        <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]} value={'about'} />
-                        <Text>
-                            <Text style={styles.timeTextStyles}>
-                                <LanguageText styles={styles.timeTextStyles} value={'timing'} />: {openTime} - {closeTime}
+                            <DisplayReviews restId={restId} cityName={city} />
+                        </View>
+                    ) : (
+                        <View>
+                            <LanguageText styles={[styles.textStyles, { borderBottomColor: 'grey', borderTopWidth: 2, fontSize: 28 }]} value={'about'} />
+                            <Text>
+                                <Text style={styles.timeTextStyles}>
+                                    <LanguageText styles={styles.timeTextStyles} value={'timing'} />: {openTime} - {closeTime}
+                                </Text>
                             </Text>
-                        </Text>
-                        <Text>
-                            <Text style={styles.timeTextStyles}>
-                                <LanguageText styles={styles.timeTextStyles} value={'address'} />: {address}
+                            <Text>
+                                <Text style={styles.timeTextStyles}>
+                                    <LanguageText styles={styles.timeTextStyles} value={'address'} />: {address}
+                                </Text>
                             </Text>
-                        </Text>
-                        {/* <View style={{ height: 200, backgroundColor: 'green', alignItems: 'center' }}>
+                            {/* <View style={{ height: 200, backgroundColor: 'green', alignItems: 'center' }}>
                             <MapView style={{ height: '100%', width: '90%' }}
                                 initialRegion={{
                                     latitude: parseInt(latitude),
@@ -240,16 +264,44 @@ const RestaurantDetail = ({ navigation, route }) => {
                                 />
                             </MapView> 
                         </View>*/}
-                    </View>
-                )
-            }
-        </ScrollView>
+                        </View>
+                    )
+                }
+            </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+    },
+    searchView: {
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    searchCard: {
+        width: '90%',
+        height: 50,
+        flexDirection: 'row'
+    },
+    searchIcon: {
+        height: '100%',
+        width: '15%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    searchInput: {
+        width: '70%',
+        height: '100%',
+        justifyContent: 'center',
+    },
+    crossIcon: {
+        width: '15%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     imageStyles: {
         height: 300

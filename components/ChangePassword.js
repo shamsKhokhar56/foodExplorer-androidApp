@@ -11,6 +11,13 @@ const ChangePassword = () => {
     const [newPass, setNewPass] = useState('')
     const [newPass2, setNewPass2] = useState('')
 
+    const changePasswordHandler = () => {
+        Auth.changePassword(currentPass, newPass, newPass2)
+        setCurrentPass('')
+        setNewPass('')
+        setNewPass2('')
+    }
+
     return (
         <View>
             <View>
@@ -50,7 +57,7 @@ const ChangePassword = () => {
             </View>
             <View style={styles.buttonView}>
                 <TouchableHighlight underlayColor="none"
-                    onPress={() => { Auth.changePassword(currentPass, newPass, newPass2) }}
+                    onPress={() => { changePasswordHandler() }}
                 >
                     <Text style={styles.buttonText}>
                         Update Passowrd

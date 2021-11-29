@@ -8,8 +8,7 @@ import firebase from '../Firebase/fire';
 
 import Loading from '../components/Loading';
 import Card from '../components/Card';
-import { FontAwesome } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
 const RestaurantScreen = ({ navigation, route }) => {
@@ -47,6 +46,11 @@ const RestaurantScreen = ({ navigation, route }) => {
                             onChangeText={text => { setSearch(text) }}
                             value={search}
                         />
+                    </View>
+                    <View style={styles.crossIcon}>
+                        <TouchableHighlight underlayColor="none" onPress={() => setSearch('')}>
+                            <Entypo name="cross" size={18} color={"#A3A8AE"} />
+                        </TouchableHighlight>
                     </View>
                 </Card>
             </View>
@@ -115,11 +119,10 @@ const styles = StyleSheet.create({
         padding: 10
     },
     searchView: {
-        height: '10%',
+        height: 80,
         width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
-        maxHeight: '10%'
     },
     upperDashboard: {
         height: '10%',
@@ -158,9 +161,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     searchInput: {
-        width: '85%',
+        width: '70%',
         height: '100%',
         justifyContent: 'center',
+    },
+    crossIcon: {
+        height: '100%',
+        width: '15%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     restaurantsMainView: {
         height: '90%',

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Image, Dimensions } from 'react-native';
 
 import { Camera } from 'expo-camera';
-import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import * as ImagePicker from 'expo-image-picker';
 
 import LanguageText from '../components/LanguageText';
 
@@ -16,7 +16,6 @@ const CameraScreen = ({ navigation }) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
 
-    const [response1, setResponse] = useState();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -26,19 +25,39 @@ const CameraScreen = ({ navigation }) => {
         })();
     }, []);
 
-    // const takePicture = async () => {
-    //     if (cameraRef) {
-    //         const options = { quality: 1, base64: true };
-    //         const data = await cameraRef.takePictureAsync(options);
-    //     }
-    // };
-
     const takePicture = () => {
 
         if (cameraRef) {
             cameraRef.takePictureAsync({ onPictureSaved: onPictureSaved });
         }
     };
+
+    const ImagePickerHandler = async () => {
+        if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+            else {
+                pickImage()
+            }
+        }
+    }
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            onPictureSaved(result)
+        }
+    }
 
     const onPictureSaved = async (photo) => {
         console.log(photo.uri)
@@ -93,7 +112,7 @@ const CameraScreen = ({ navigation }) => {
                 clicked ? (
                     <View style={styles.camera}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <LanguageText styles={styles.textStyles} value={'imageIsProcessing'} />
+                            <LanguageText value={'imageIsProcessing'} />
                         </View>
                     </View>
                 ) : (
@@ -107,9 +126,18 @@ const CameraScreen = ({ navigation }) => {
                 )
             }
             <View style={styles.bottom}>
-                <TouchableOpacity stlye={styles.button} onPress={() => takePicture()}>
-                    <Entypo name="circle" size={100} color="white" />
-                </TouchableOpacity>
+                <View style={styles.innerBottom}>
+                </View>
+                <View style={styles.innerBottom}>
+                    <TouchableOpacity onPress={() => takePicture()}>
+                        <Entypo name="circle" size={100} color="white" />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.innerBottom}>
+                    <TouchableHighlight style={styles.imagePickerButton} onPress={() => ImagePickerHandler()}>
+                        <FontAwesome name="photo" size={50} color="white" />
+                    </TouchableHighlight>
+                </View>
             </View>
         </View>
     )
@@ -124,15 +152,35 @@ const styles = StyleSheet.create({
     },
     bottom: {
         height: '20%',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
+        flexDirection: 'row',
         backgroundColor: 'black',
         borderTopColor: 'white',
         borderTopWidth: 1
+        // justifyContent: 'space-evenly',
+        // alignItems: 'center',
+        // backgroundColor: 'black',
+        // borderTopColor: 'white',
+        // borderTopWidth: 1,
+        // flexDirection: 'row'
+    },
+    innerBottom: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '30%',
+        height: '100%',
     },
     button: {
         alignSelf: 'flex-end',
         alignItems: 'center',
+    },
+    imagePickerButton: {
+
+    },
+    imageStyles: {
+        height: 60,
+        width: 60
     },
 })
 

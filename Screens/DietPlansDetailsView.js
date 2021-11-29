@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Alert, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 
 import Colors from '../constants/Colors';
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import LanguageText from '../components/LanguageText';
+
 
 const DietPlansDetailsView = ({ navigation, route }) => {
 
@@ -29,37 +29,25 @@ const DietPlansDetailsView = ({ navigation, route }) => {
         { id: '6', dayName: 'saturday', },
         { id: '7', dayName: 'sunday' },
     ]
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = async () => {
-        setIsEnabled(isEnabled => !isEnabled);
-        try {
-            await AsyncStorage.setItem('notification', JSON.stringify(isEnabled))
-            if (!isEnabled) {
-                console.log('turned on notifications')
-            }
-            else {
-                console.log('turned off notifications')
-            }
-        }
-        catch (error) {
-            Alert.alert('', 'Notifications settings cannot be updated!');
-        }
-    }
 
     return (
         <View style={styles.screen}>
-            <View style={styles.notificationStyles}>
+            {/* <View style={styles.notificationStyles}>
                 <Text style={styles.textStyles2}>
                     Notifications for daily diet
                 </Text>
-                <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isEnabled ? "#81b0ff" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
+                {loading ?
+                    <Entypo name="circle" size={10} color="black" />
+                    :
+                    <Switch
+                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        thumbColor={isEnabled ? "#81b0ff" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />}
             </View>
+            {isEnabled ? <App /> : <></>} */}
             <ScrollView>
                 {weekdays.map((item) => {
                     return (

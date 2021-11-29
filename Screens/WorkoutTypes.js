@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-    View, Text, StyleSheet, TouchableHighlight,
-    ImageBackground, FlatList, ScrollView, Dimensions
+    View, StyleSheet, TouchableHighlight,
+    ImageBackground, FlatList, ScrollView, Dimensions, Text
 }
     from 'react-native';
 
@@ -32,6 +32,9 @@ const WorkoutTypes = ({ route, navigation }) => {
     if (name === "Home Based Workout") {
         return (
             <View style={styles.screen}>
+                <View>
+                    <LanguageText styles={styles.headingText} value={'homeBasedWorkout'} />
+                </View>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={homeBasedWorkout}
@@ -62,6 +65,9 @@ const WorkoutTypes = ({ route, navigation }) => {
     else if (name === "Build Muscles") {
         return (
             <View style={styles.screen}>
+                <View>
+                    <LanguageText styles={styles.headingText} value={'buildMuscles'} />
+                </View>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={building}
@@ -91,6 +97,9 @@ const WorkoutTypes = ({ route, navigation }) => {
     else if (name === 'Lose Weight') {
         return (
             <View style={styles.screen}>
+                <View>
+                    <LanguageText styles={styles.headingText} value={'loseWeight'} />
+                </View>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={LoseWeight}
@@ -124,6 +133,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.backgroundGrey
+    },
+    headingText: {
+        fontSize: 22,
+        fontWeight: 'bold'
     },
     cardStyles: {
         height: 150,

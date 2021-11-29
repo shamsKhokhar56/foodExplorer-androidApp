@@ -6,8 +6,10 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 import firebase from '../Firebase/fire';
 import ChangePassword from '../components/ChangePassword';
+import Auth from '../services/auth';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
 
     const [placeholder, setPlaceholder] = useState('')
     var uid = ''
@@ -41,6 +43,23 @@ const Profile = () => {
         }
     }
 
+    const deleteAccountHandler = () => {
+        Alert.alert(
+            "Delete Account",
+            "Are you sure you to delete account?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { 
+                    text: "OK", 
+                    onPress: () => Auth.deleteAccount() }
+            ]
+        );
+    }
+
     return (
         <ScrollView contentContainerStyle={styles.contentContainer} keyboardShouldPersistTaps={'always'}>
             <View style={styles.container} >
@@ -69,6 +88,13 @@ const Profile = () => {
                     </TouchableHighlight>
                 </View>
                 <ChangePassword />
+                <View style={styles.buttonView}>
+                    <TouchableHighlight underlayColor="none" onPress={() => deleteAccountHandler()}>
+                        <Text style={styles.buttonText}>
+                            Delete Account
+                        </Text>
+                    </TouchableHighlight>
+                </View>
             </View>
             <View style={{ height: '25%', backgroundColor: Colors.backgroundGrey }}>
 
@@ -118,6 +144,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 24,
         textAlign: 'center'
+    },
+    deleteAccountView: {
+        backgroundColor: 'green'
     },
 
 });
