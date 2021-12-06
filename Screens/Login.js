@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
 
@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
                             <LanguageText styles={{ fontSize: 18 }} value={'signup'} />
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flexDirection: 'column', alignItems: 'center', margin: 10 }}>
+                    {/* <View style={{ flexDirection: 'column', alignItems: 'center', margin: 10 }}>
                         <Text style={{ fontSize: 20, padding: 10 }}>OR</Text>
 
                         <LanguageText styles={{ fontSize: 20 }} value={'continueWith'} />
@@ -59,10 +59,10 @@ const Login = ({ navigation }) => {
                         <TouchableHighlight>
                             <SocialIcon type="facebook" />
                         </TouchableHighlight>
-                    </View>
+                    </View> */}
                 </View>
             </LinearGradient>
-        </View>
+        </View >
     );
 }
 const styles = StyleSheet.create({

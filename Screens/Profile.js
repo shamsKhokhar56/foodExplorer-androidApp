@@ -20,8 +20,12 @@ const Profile = ({ navigation }) => {
 
     const getUserData = async () => {
         uid = await firebase.auth().currentUser.uid
-        await firebase.firestore().collection('User').doc(uid).get()
-            .then(snapshot => setPlaceholder(snapshot.data().UserName))
+        try {
+            await firebase.firestore().collection('User').doc(uid).get()
+                .then(snapshot => setPlaceholder(snapshot.data().UserName))
+        }catch(error){
+            Alert.alert(error.message)
+        }
     }
 
     const [userName, setUserName] = useState('')

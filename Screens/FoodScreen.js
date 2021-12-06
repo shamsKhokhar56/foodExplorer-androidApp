@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, FlatList, TouchableHighlight, Text } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList, TouchableHighlight, Text, Alert } from 'react-native';
 
 import Card from '../components/Card'
 
@@ -18,10 +18,14 @@ const FoodScreen = ({ navigation }) => {
     const ref = firebase.firestore().collection("FoodItem");
 
     function getFood() {
-        ref.get().then((item) => {
-            const items = item.docs.map((doc) => doc.data());
-            setFood(items);
-        });
+        try{
+            ref.get().then((item) => {
+                const items = item.docs.map((doc) => doc.data());
+                setFood(items);
+            });
+        }catch(error){
+            Alert.alert(error.message)
+        }
     }
     useEffect(() => {
         getFood();

@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, TouchableHighlight, View, ImageBackground, Alert, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableHighlight, View, ImageBackground, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
 
+import LanguageText from '../components/LanguageText';
 import Card from '../components/Card';
+
 import Colors from '../constants/Colors';
 
 import DietPlansData from '../data/DietPlansData';
 
-import LanguageText from '../components/LanguageText';
+import firebase from '../Firebase/fire';
 
 const DietPlansDetails = ({ navigation, route }) => {
+
     const id = route.params.id
+    const bmi = route.params.bmi
 
     var name = ''
 
@@ -27,92 +31,104 @@ const DietPlansDetails = ({ navigation, route }) => {
     const [status, setStatus] = useState('')
     const [showResult, setShowResult] = useState(false)
 
-    const CalculateBMI = () => {
+    const storeBmi = async (value) => {
+        const uid = await firebase.auth().currentUser.uid
+        await firebase.firestore().collection('User').doc(uid)
+            .update({
+                bmi: value
+            })
+    }
+
+    const CalculateBMI = async () => {
         if (weight == '' || feet == '' || inches == '') {
             Alert.alert('First enter all values!')
         }
         else {
             const a = feet * 0.3048 + inches * 0.0254
             setResult((weight / (a * a)).toFixed(2))
-            if (result > 0 && result < 18) {
-                setStatus('Under Weight')
-                setShowResult(true)
-            }
-            if (result > 18 && result < 24.9) {
-                setStatus('Normal Weight')
-                setShowResult(true)
-            }
-            if (result > 25) {
-                setStatus('Over Weight')
-                setShowResult(true)
-            }
+            storeBmi((weight / (a * a)).toFixed(2))
+            // if (result > 0 && result < 18) {
+            //     setStatus('Under Weight')
+            //     setShowResult(true)
+            // }
+            // if (result > 18 && result < 24.9) {
+            //     setStatus('Normal Weight')
+            //     setShowResult(true)
+            // }
+            // if (result > 25) {
+            //     setStatus('Over Weight')
+            setShowResult(true)
+            // }
+
         }
     }
     if (name === 'Calculate BMI') {
         return (
-            <KeyboardAvoidingView style={styles.screen} behavior='height' keyboardVerticalOffset={'10'}>
-                <View style={styles.BmiInformationView}>
-                    <LanguageText styles={styles.headingText} value={'whatIsBMI'} />
-                    <LanguageText styles={styles.innerHeading} value={'bmiInfo'} />
-                    <LanguageText styles={styles.innerHeading} value={'bmiCategory'} />
-                    <View style={{ paddingLeft: 25, paddingTop: 5 }}>
-                        <Text style={styles.innerHeading}>
-                            - <LanguageText styles={styles.innerHeading} value={'underWeight'} /> = <LanguageText styles={styles.innerHeading} value={'lessThan'} /> 18.5
-                        </Text>
-                        <Text style={styles.innerHeading}>
-                            - <LanguageText styles={styles.innerHeading} value={'normalWeight'} /> = 18.5 - 24.9
-                        </Text>
-                        <Text style={styles.innerHeading}>
-                            - <LanguageText styles={styles.innerHeading} value={'overWeight'} /> = Greater then 30
-                        </Text>
+            <ScrollView keyboardShouldPersistTaps={'always'}>
+                <KeyboardAvoidingView style={styles.screen} behavior='height' keyboardVerticalOffset={'10'}>
+                    <View style={styles.BmiInformationView}>
+                        <LanguageText styles={styles.headingText} value={'whatIsBMI'} />
+                        <LanguageText styles={styles.innerHeading} value={'bmiInfo'} />
+                        <LanguageText styles={styles.innerHeading} value={'bmiCategory'} />
+                        <View style={{ paddingLeft: 25, paddingTop: 5 }}>
+                            <Text style={styles.innerHeading}>
+                                - <LanguageText styles={styles.innerHeading} value={'underWeight'} /> = <LanguageText styles={styles.innerHeading} value={'lessThan'} /> 18.5
+                            </Text>
+                            <Text style={styles.innerHeading}>
+                                - <LanguageText styles={styles.innerHeading} value={'normalWeight'} /> = 18.5 - 24.9
+                            </Text>
+                            <Text style={styles.innerHeading}>
+                                - <LanguageText styles={styles.innerHeading} value={'overWeight'} /> = Greater then 30
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.BmiCalculatorView}>
-                    <Card style={styles.cardStyles}>
-                        <View style={styles.BMIView}>
-                            <Text style={styles.textStyles}>
-                                <LanguageText styles={styles.textStyles} value={'weight'} />( in kg ):
-                            </Text>
-                            <TextInput
-                                placeholder='Kg'
-                                style={styles.inputStyles}
-                                onChangeText={text => { setweight(text) }}
-                                value={weight}
-                            />
-                        </View>
-                        <View style={styles.BMIView}>
-                            <LanguageText styles={styles.textStyles} value={'height'} />
-                            <TextInput
-                                placeholder='Feet'
-                                style={styles.inputStyles}
-                                onChangeText={text => { setFeet(text) }}
-                                value={feet}
-                            />
-                            <TextInput
-                                placeholder='Inches'
-                                style={styles.inputStyles}
-                                onChangeText={text => { setInches(text) }}
-                                value={inches}
-                            />
-                        </View>
-                        <View style={styles.calculateButtonView}>
-                            <TouchableHighlight onPress={CalculateBMI} style={styles.calculateButton}>
-                                <LanguageText styles={styles.buttonText} value={'calculate'} />
-                            </TouchableHighlight>
-                        </View>
-                        <View style={styles.resultView}>
-                            <LanguageText styles={styles.textStyles} value={'yourBmiIs'} />
-                            <Text style={[styles.textStyles, { paddingHorizontal: 5, color: Colors.primary }]}>
-                                {result}
-                            </Text>
-                        </View>
-                    </Card>
+                    <View style={styles.BmiCalculatorView}>
+                        <Card style={styles.cardStyles}>
+                            <View style={styles.BMIView}>
+                                <Text style={styles.textStyles}>
+                                    <LanguageText styles={styles.textStyles} value={'weight'} />( in kg ):
+                                </Text>
+                                <TextInput
+                                    placeholder='Kg'
+                                    style={styles.inputStyles}
+                                    onChangeText={text => setweight(text)}
+                                    value={weight}
+                                />
+                            </View>
+                            <View style={styles.BMIView}>
+                                <LanguageText styles={styles.textStyles} value={'height'} />
+                                <TextInput
+                                    placeholder='Feet'
+                                    style={styles.inputStyles}
+                                    onChangeText={text => setFeet(text)}
+                                    value={feet}
+                                />
+                                <TextInput
+                                    placeholder='Inches'
+                                    style={styles.inputStyles}
+                                    onChangeText={text => setInches(text)}
+                                    value={inches}
+                                />
+                            </View>
+                            <View style={styles.calculateButtonView}>
+                                <TouchableHighlight onPress={() => CalculateBMI()} style={styles.calculateButton}>
+                                    <LanguageText styles={styles.buttonText} value={'calculate'} />
+                                </TouchableHighlight>
+                            </View>
+                            <View style={styles.resultView}>
+                                <LanguageText styles={styles.textStyles} value={'yourBmiIs'} />
+                                <Text style={[styles.textStyles, { paddingHorizontal: 5, color: Colors.primary }]}>
+                                    {result}
+                                </Text>
+                            </View>
+                        </Card>
 
-                </View>
-                <View style={styles.BmiNoteView}>
-                    <LanguageText styles={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]} value={'bmiNote'} />
-                </View>
-            </KeyboardAvoidingView>
+                    </View>
+                    <View style={styles.BmiNoteView}>
+                        <LanguageText styles={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]} value={'bmiNote'} />
+                    </View>
+                </KeyboardAvoidingView>
+            </ScrollView>
         )
     }
     else if (name === 'Diet Plans') {
@@ -127,13 +143,13 @@ const DietPlansDetails = ({ navigation, route }) => {
                             <Card style={styles.cardStyles2} key={item.id}>
                                 <TouchableHighlight
                                     onPress={() => {
-                                        navigation.navigate('DietPlansDetailsView', {
-                                            id: item.id
+                                        navigation.navigate('DietPlansWeekView', {
+                                            id: item.id, name: item.name
                                         })
                                     }}>
                                     <ImageBackground style={styles.imageStyle} source={item.image}>
                                         <Text style={styles.innerTextStyles}>
-                                            {item.name}
+                                            {item.name} {status == item.name ? 'Recommneded' : ''}
                                         </Text>
                                     </ImageBackground>
                                 </TouchableHighlight>

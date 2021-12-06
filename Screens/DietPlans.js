@@ -1,14 +1,27 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, TouchableHighlight, ImageBackground, Alert } from 'react-native';
 
 import dietPlans from '../data/DietPlans';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
 
+import firebase from '../Firebase/fire';
 
 import LanguageText from '../components/LanguageText';
 
 const DietPlans = ({ navigation }) => {
+    const [isBmiCalculated, setIsBmiCalculated] = useState(false)
+    const [bmiSnapshot, setbmiSnapshot] = useState('')
+    useEffect(() => {
+        getBmi()
+    }, [])
+    const getBmi = async () => {
+        const uid = await firebase.auth().currentUser.uid
+        await firebase.firestore().collection('User').doc(uid).get()
+            .then(snapshot => setbmiSnapshot(snapshot.data().bmi))
+            // .then(() => setIsBmiCalculated(true))
+            .catch((error) => Alert.alert(error.message))
+    }
 
     return (
         <View style={styles.screen}>
@@ -20,7 +33,7 @@ const DietPlans = ({ navigation }) => {
                                 underlayColor='none'
                                 onPress={() => {
                                     navigation.navigate('DietPlansDetails', {
-                                        id: item.id
+                                        id: item.id, bmi: bmiSnapshot
                                     })
                                 }}>
                                 <ImageBackground style={styles.imageStyle} resizeMode='contain' source={item.imageSource}>

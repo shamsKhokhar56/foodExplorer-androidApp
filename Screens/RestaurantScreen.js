@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     StyleSheet, Text, View, FlatList,
-    TouchableHighlight, TextInput, Image
+    TouchableHighlight, TextInput, Image, Alert
 } from 'react-native';
 
 import firebase from '../Firebase/fire';
@@ -12,29 +12,87 @@ import { Entypo, FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
 const RestaurantScreen = ({ navigation, route }) => {
-    const cityName = route.params.city
-
+    const [cityName, setCityName] = useState(route.params.city)
     const [resData, setResData] = useState();
+    const [location, setLocation] = useState(false)
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('')
-    const [location, setLocation] = useState('Islamabad')
-    const [locationCheck, setLocationCheck] = useState(false)
 
     const getData = async () => {
         const ref = firebase.firestore().collection(`Restaurant${cityName}`)
-        await ref.get().then((item) => {
-            const items = item.docs.map((doc) => doc.data());
-            setResData(items);
-            setLoading(false);
-        })
+        try {
+            await ref.get().then((item) => {
+                const items = item.docs.map((doc) => doc.data());
+                setResData(items);
+                setLoading(false);
+            })
+        } catch (error) {
+            Alert.alert(error.message)
+        }
 
     }
     useEffect(() => {
         getData();
-    }, []);
+    }, [location]);
+    const cities = [
+        {
+            code: '1',
+            city: 'Faisalabad'
+        },
+        {
+            code: '2',
+            city: 'Islamabad'
+        },
+        {
+            code: '3',
+            city: 'Karachi'
+        },
+        {
+            code: '4',
+            city: 'Lahore'
+        },
+        {
+            code: '5',
+            city: 'Rawalpindi'
+        },
+    ];
+    const handleCityChange = (cityName) => {
+        setLocation(false)
+        setCityName(cityName)
+        setLoading(true)
+    }
 
     return (
         <View style={styles.container} >
+            <View style={styles.searchView}>
+                <Card style={styles.searchCard}>
+                    <View style={styles.searchIcon}>
+                        <Entypo name="location-pin" size={30} color={Colors.primary} />
+                    </View>
+                    <TouchableHighlight underlayColor="none" style={styles.searchInput} onPress={() => { setLocation(!location) }} >
+                        <View >
+                            <Text>{cityName}</Text>
+                        </View>
+                    </TouchableHighlight>
+                </Card>
+            </View>
+            {
+                location ?
+                    (<View style={{ backgroundColor: 'white', width: '90%', justifyContent: 'center', alignItems: 'center' }} >
+                        {cities.map((item) => {
+                            return (
+                                <View key={item.code} style={{ width: '100%', height: 50, justifyContent: 'center', borderBottomWidth: 1 }} >
+                                    <TouchableHighlight underlayColor="none" onPress={() => {handleCityChange(item.city)}} >
+                                        <Text style={{ textAlign: 'center', fontSize: 20 }}>{item.city}</Text>
+                                    </TouchableHighlight>
+                                </View>
+                            )
+                        })}
+                    </View>)
+                    : (
+                        (<View></View>)
+                    )
+            }
             <View style={styles.searchView}>
                 <Card style={styles.searchCard}>
                     <View style={styles.searchIcon}>

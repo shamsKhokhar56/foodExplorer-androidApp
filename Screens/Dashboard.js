@@ -16,7 +16,7 @@ const Dashboard = ({ navigation }) => {
                     <View style={styles.dashboardItemsViewLower}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('RestaurantScreen',
-                                { city: 'Karachi' }
+                                { city: 'Islamabad' }
                             )}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/Restaurant1.jpg')}>
                                     <LanguageText styles={styles.textStyles} value={'restaurant'} />
@@ -55,7 +55,7 @@ const Dashboard = ({ navigation }) => {
             </View>
             <View style={styles.bottom}>
                 <View style={styles.cameraButtonView}>
-                    <TouchableHighlight activeOpacity={0.1} underlayColor="white"
+                    <TouchableHighlight activeOpacity={0.1} underlayColor="none"
                         onPress={() => { navigation.navigate('Camera') }}
                     >
                         <Ionicons style={styles.scanIcon} name="scan-circle-outline" size={70} color={Colors.primary} />
@@ -106,13 +106,12 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     dashboardItemsViewLower: {
-        // backgroundColor: 'green',
         alignItems: 'center',
         justifyContent: 'center',
         height: 200,
     },
     lowerCard: {
-        width: '90%',
+        width: '95%',
         height: '90%',
         overflow: 'hidden'
     },
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     },
     scanIcon: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })
 

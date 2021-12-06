@@ -9,6 +9,7 @@ import LanguageText from '../components/LanguageText';
 const DietPlansDetailsView = ({ navigation, route }) => {
 
     const id = route.params.id
+    const dayName = route.params.name
     var name = 'name'
     if (id === 0) {
         name = 'NormalWeight'
@@ -20,90 +21,56 @@ const DietPlansDetailsView = ({ navigation, route }) => {
         name = 'OverWeight'
     }
 
-    const weekdays = [
-        { id: '1', dayName: 'monday', },
-        { id: '2', dayName: 'tuesday', },
-        { id: '3', dayName: 'wednesday', },
-        { id: '4', dayName: 'thursday', },
-        { id: '5', dayName: 'friday', },
-        { id: '6', dayName: 'saturday', },
-        { id: '7', dayName: 'sunday' },
-    ]
-
     return (
         <View style={styles.screen}>
-            {/* <View style={styles.notificationStyles}>
-                <Text style={styles.textStyles2}>
-                    Notifications for daily diet
-                </Text>
-                {loading ?
-                    <Entypo name="circle" size={10} color="black" />
-                    :
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isEnabled ? "#81b0ff" : "#f4f3f4"}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />}
+            <View style={styles.dayView}>
+                <LanguageText styles={styles.dayText} value={dayName} />
             </View>
-            {isEnabled ? <App /> : <></>} */}
-            <ScrollView>
-                {weekdays.map((item) => {
-                    return (
-                        <View key={item.id}>
-                            <View style={styles.dayView}>
-                                <LanguageText styles={styles.dayText} value={item.dayName} />
-                            </View>
-                            <View style={styles.dietPlanView}>
-                                <View style={styles.timeView}>
-                                    <LanguageText styles={styles.textStyles2} value={'breakfast'} />
-                                    <LanguageText styles={styles.textStyles2} value={`breakfastTime${name}`} />
-                                </View>
-                                <View style={styles.mealView}>
-                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Breakfast${name}`} />
-                                </View>
-                            </View>
-                            <View style={styles.dietPlanView}>
-                                <View style={styles.timeView}>
-                                    <LanguageText styles={styles.textStyles2} value={'midMeal'} />
-                                    <LanguageText styles={styles.textStyles2} value={`snackTime${name}`} />
-                                </View>
-                                <View style={styles.mealView}>
-                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Snack${name}`} />
-                                </View>
-                            </View>
-                            <View style={styles.dietPlanView}>
-                                <View style={styles.timeView}>
-                                    <LanguageText styles={styles.textStyles2} value={'lunch'} />
-                                    <LanguageText styles={styles.textStyles2} value={`lunchTime${name}`} />
-                                </View>
-                                <View style={styles.mealView}>
-                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Lunch${name}`} />
-                                </View>
-                            </View>
-                            <View style={styles.dietPlanView}>
-                                <View style={styles.timeView}>
-                                    <LanguageText styles={styles.textStyles2} value={'evening'} />
-                                    <LanguageText styles={styles.textStyles2} value={`eveningTime${name}`} />
-                                </View>
-                                <View style={styles.mealView}>
-                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Evening${name}`} />
-                                </View>
-                            </View>
-                            <View style={styles.dietPlanView}>
-                                <View style={styles.timeView}>
-                                    <LanguageText styles={styles.textStyles2} value={'dinner'} />
-                                    <LanguageText styles={styles.textStyles2} value={`dinnerTime${name}`} />
-                                </View>
-                                <View style={styles.mealView}>
-                                    <LanguageText styles={styles.textStyles} value={`${item.dayName}Dinner${name}`} />
-                                </View>
-                            </View>
-                        </View>
-                    )
-                })}
-            </ScrollView>
+            <View style={styles.dietPlanView}>
+                <View style={styles.timeView}>
+                    <LanguageText styles={styles.textStyles2} value={'breakfast'} />
+                    <LanguageText styles={styles.textStyles2} value={`breakfastTime${name}`} />
+                </View>
+                <View style={styles.mealView}>
+                    <LanguageText styles={styles.textStyles} value={`${dayName}Breakfast${name}`} />
+                </View>
+            </View>
+            <View style={styles.dietPlanView}>
+                <View style={styles.timeView}>
+                    <LanguageText styles={styles.textStyles2} value={'midMeal'} />
+                    <LanguageText styles={styles.textStyles2} value={`snackTime${name}`} />
+                </View>
+                <View style={styles.mealView}>
+                    <LanguageText styles={styles.textStyles} value={`${dayName}Snack${name}`} />
+                </View>
+            </View>
+            <View style={styles.dietPlanView}>
+                <View style={styles.timeView}>
+                    <LanguageText styles={styles.textStyles2} value={'lunch'} />
+                    <LanguageText styles={styles.textStyles2} value={`lunchTime${name}`} />
+                </View>
+                <View style={styles.mealView}>
+                    <LanguageText styles={styles.textStyles} value={`${dayName}Lunch${name}`} />
+                </View>
+            </View>
+            <View style={styles.dietPlanView}>
+                <View style={styles.timeView}>
+                    <LanguageText styles={styles.textStyles2} value={'evening'} />
+                    <LanguageText styles={styles.textStyles2} value={`eveningTime${name}`} />
+                </View>
+                <View style={styles.mealView}>
+                    <LanguageText styles={styles.textStyles} value={`${dayName}Evening${name}`} />
+                </View>
+            </View>
+            <View style={styles.dietPlanView}>
+                <View style={styles.timeView}>
+                    <LanguageText styles={styles.textStyles2} value={'dinner'} />
+                    <LanguageText styles={styles.textStyles2} value={`dinnerTime${name}`} />
+                </View>
+                <View style={styles.mealView}>
+                    <LanguageText styles={styles.textStyles} value={`${dayName}Dinner${name}`} />
+                </View>
+            </View>
         </View>
     )
 }
@@ -111,6 +78,8 @@ const DietPlansDetailsView = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     notificationStyles: {
         justifyContent: 'space-between',

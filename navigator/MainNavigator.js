@@ -31,6 +31,9 @@ import ResultScreen from '../Screens/ResultScreen';
 import Auth from '../services/auth';
 import Languages from '../Screens/Languages';
 import WorkoutInstructions from '../Screens/WorkoutInstructions';
+import DietPlansWeekView from '../Screens/DietPlansWeekView';
+import App from '../services/NotificationServices';
+import Suggestions from '../Screens/Suggestions';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -196,6 +199,25 @@ function dashboardScreenStack({ navigation }) {
                 }}
             />
             <Stack.Screen
+                name="DietPlansWeekView"
+                component={DietPlansWeekView}
+                options={{
+                    title: '', //Set Header Title
+                    headerLeft: () => (
+                        <Ionicons name="arrow-back" size={35} color="white"
+                            style={{ margin: 10 }} onPress={() => navigation.goBack()}
+                        />
+                    ),
+                    headerStyle: {
+                        backgroundColor: Colors.primary, //Set Header color
+                    },
+                    headerTintColor: '#fff', //Set Header text color
+                    headerTitleStyle: {
+                        fontWeight: 'bold', //Set Header text style
+                    },
+                }}
+            />
+            <Stack.Screen
                 name="DietPlansDetailsView"
                 component={DietPlansDetailsView}
                 options={{
@@ -328,6 +350,25 @@ function dashboardScreenStack({ navigation }) {
                     },
                 }}
             />
+            <Stack.Screen
+                name="Notifications"
+                component={App}
+                options={{
+                    title: '', //Set Header Title
+                    headerLeft: () => (
+                        <Ionicons name="arrow-back" size={35} color="white"
+                            style={{ margin: 10 }} onPress={() => navigation.goBack()}
+                        />
+                    ),
+                    headerStyle: {
+                        backgroundColor: Colors.primary, //Set Header color
+                    },
+                    headerTintColor: '#fff', //Set Header text color
+                    headerTitleStyle: {
+                        fontWeight: 'bold', //Set Header text style
+                    },
+                }}
+            />
         </Stack.Navigator>
     );
 }
@@ -382,6 +423,31 @@ function ApplicationSettingScreenStack({ navigation }) {
     );
 }
 
+function SuggestionsScreenStack({ navigation }) {
+    return (
+        <Stack.Navigator initialRouteName="Suggestions">
+            <Stack.Screen
+                name="Suggestions"
+                component={Suggestions}
+                options={{
+                    title: 'Suggestions',
+                    headerLeft: () => (
+                        <Ionicons name="arrow-back" size={40} color="white"
+                            style={{ margin: 10 }} onPress={() => navigation.goBack()}
+                        />
+                    ),
+                    headerStyle: {
+                        backgroundColor: '#f4511e', //Set Header color
+                    },
+                    headerTintColor: '#fff', //Set Header text color
+                    headerTitleStyle: {
+                        fontWeight: 'bold', //Set Header text style
+                    },
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
 function LanguageScreenStack({ navigation }) {
     return (
         <Stack.Navigator initialRouteName="Languages">
@@ -431,6 +497,17 @@ const DrawerNavigator = ({ route }) => {
                         <Ionicons
                             name='md-home-outline' size={24} color={Colors.primary}
                         />
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="Suggestions"
+                options={{ drawerLabel: 'Suggestions' }}
+                component={SuggestionsScreenStack}
+                options={{
+                    title: 'Suggestions',
+                    drawerIcon: () => (
+                        <Entypo name="list" size={24} color={Colors.primary} />
                     )
                 }}
             />

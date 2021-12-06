@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { LogBox } from 'react-native';
+import { Alert, LogBox } from 'react-native';
 
 import firebase from './Firebase/fire';
 import Login from './Screens/Login';
@@ -29,7 +29,7 @@ export default AppContainer = () => {
     setUser(user);
     if (initializing) setInitializing(false);
   }
-  useEffect(() => {
+  useEffect(async () => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
