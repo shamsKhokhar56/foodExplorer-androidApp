@@ -7,7 +7,6 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import firebase from '../Firebase/fire';
 import ChangePassword from '../components/ChangePassword';
 import Auth from '../services/auth';
-import { NavigationContainer } from '@react-navigation/native';
 
 const Profile = ({ navigation }) => {
 

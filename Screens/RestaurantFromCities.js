@@ -15,7 +15,7 @@ const RestaurantFromCities = ({ navigation, route }) => {
     const cityName = route.params.cityName
 
     const [resData, setResData] = useState();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
 
     const getData = async () => {

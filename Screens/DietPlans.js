@@ -10,18 +10,18 @@ import firebase from '../Firebase/fire';
 import LanguageText from '../components/LanguageText';
 
 const DietPlans = ({ navigation }) => {
-    const [isBmiCalculated, setIsBmiCalculated] = useState(false)
-    const [bmiSnapshot, setbmiSnapshot] = useState('')
-    useEffect(() => {
-        getBmi()
-    }, [])
-    const getBmi = async () => {
-        const uid = await firebase.auth().currentUser.uid
-        await firebase.firestore().collection('User').doc(uid).get()
-            .then(snapshot => setbmiSnapshot(snapshot.data().bmi))
-            // .then(() => setIsBmiCalculated(true))
-            .catch((error) => Alert.alert(error.message))
-    }
+    // const [isBmiCalculated, setIsBmiCalculated] = useState(false)
+    // const [bmiSnapshot, setbmiSnapshot] = useState('')
+    // useEffect(() => {
+    //     getBmi()
+    // }, [])
+    // const getBmi = async () => {
+    //     const uid = await firebase.auth().currentUser.uid
+    //     await firebase.firestore().collection('User').doc(uid).get()
+    //         .then(snapshot => setbmiSnapshot(snapshot.data().bmi))
+    //         // .then(() => setIsBmiCalculated(true))
+    //         .catch((error) => Alert.alert(error.message))
+    // }
 
     return (
         <View style={styles.screen}>
@@ -33,7 +33,7 @@ const DietPlans = ({ navigation }) => {
                                 underlayColor='none'
                                 onPress={() => {
                                     navigation.navigate('DietPlansDetails', {
-                                        id: item.id, bmi: bmiSnapshot
+                                        id: item.id
                                     })
                                 }}>
                                 <ImageBackground style={styles.imageStyle} resizeMode='contain' source={item.imageSource}>

@@ -202,7 +202,7 @@ function dashboardScreenStack({ navigation }) {
                 name="DietPlansWeekView"
                 component={DietPlansWeekView}
                 options={{
-                    title: '', //Set Header Title
+                    title: 'Select A Week Day', //Set Header Title
                     headerLeft: () => (
                         <Ionicons name="arrow-back" size={35} color="white"
                             style={{ margin: 10 }} onPress={() => navigation.goBack()}

@@ -8,20 +8,6 @@ const WorkoutInstructions = ({ route }) => {
     const image = route.params.image
     const translated = (<LanguageText styles={styles.textStyles} value={`${catName}HowToDo`} screen='WI' />)
 
-    useEffect(() => {
-        getData()
-    }, [])
-
-    const getData = () => {
-        try{
-            const newTranslated = (<LanguageText value={`${catName}HowToDo`} />)
-            console.log(newTranslated)
-        }
-        catch(error){
-            console.log(error.meassage)
-        }
-    }
-
     return (
         <View style={styles.container}>
             <View>

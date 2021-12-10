@@ -60,7 +60,7 @@ const ChangePassword = () => {
                     onPress={() => { changePasswordHandler() }}
                 >
                     <Text style={styles.buttonText}>
-                        Update Passowrd
+                        Update Password
                     </Text>
                 </TouchableHighlight>
             </View>

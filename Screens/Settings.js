@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Text, View, StyleSheet, Switch, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import AsyncStorageHelper from '../Helpers/AsyncStorage';
+import { Entypo } from '@expo/vector-icons';
 
 const Settings = ({ navigation }) => {
     const [isEnabled, setIsEnabled] = useState(false)
@@ -100,6 +101,15 @@ const Settings = ({ navigation }) => {
                     value={vibration}
                 />
             </View>
+            <View style={styles.notificationStyles2}>
+                <Text style={styles.textStyles2}>
+                    Select Ringtone
+                </Text>
+                <Text style={styles.textStyles}>
+                    Default
+                </Text>
+            </View>
+
         </View>
     )
 };
@@ -123,9 +133,21 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         alignItems: 'center'
     },
+    notificationStyles2: {
+        borderWidth: 0.5,
+        borderColor: 'grey',
+        paddingLeft: 5,
+        alignItems: 'flex-start',
+        justifyContent: 'center'
+    },
+    textStyles: {
+        paddingLeft: 10        
+
+    },
     textStyles2: {
         fontSize: 18,
         textAlign: 'center',
+        fontWeight: 'bold'
     },
 });
 

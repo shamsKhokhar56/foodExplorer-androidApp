@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, TouchableHighlight, View, ImageBackground, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, Keyboard, TouchableHighlight, View, ImageBackground, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
 
 import LanguageText from '../components/LanguageText';
 import Card from '../components/Card';
@@ -13,7 +13,7 @@ import firebase from '../Firebase/fire';
 const DietPlansDetails = ({ navigation, route }) => {
 
     const id = route.params.id
-    const bmi = route.params.bmi
+    // const bmi = route.params.bmi
 
     var name = ''
 
@@ -31,34 +31,38 @@ const DietPlansDetails = ({ navigation, route }) => {
     const [status, setStatus] = useState('')
     const [showResult, setShowResult] = useState(false)
 
-    const storeBmi = async (value) => {
-        const uid = await firebase.auth().currentUser.uid
-        await firebase.firestore().collection('User').doc(uid)
-            .update({
-                bmi: value
-            })
-    }
+    // const storeBmi = async (value) => {
+    //     const uid = await firebase.auth().currentUser.uid
+    //     await firebase.firestore().collection('User').doc(uid)
+    //         .update({
+    //             bmi: value
+    //         })
+    // }
 
-    const CalculateBMI = async () => {
+    const CalculateBMI = () => {
+        Keyboard.dismiss()
         if (weight == '' || feet == '' || inches == '') {
             Alert.alert('First enter all values!')
         }
         else {
+            console.log('new')
             const a = feet * 0.3048 + inches * 0.0254
-            setResult((weight / (a * a)).toFixed(2))
-            storeBmi((weight / (a * a)).toFixed(2))
-            // if (result > 0 && result < 18) {
-            //     setStatus('Under Weight')
-            //     setShowResult(true)
-            // }
-            // if (result > 18 && result < 24.9) {
-            //     setStatus('Normal Weight')
-            //     setShowResult(true)
-            // }
-            // if (result > 25) {
-            //     setStatus('Over Weight')
-            setShowResult(true)
-            // }
+            const b = (weight / (a * a)).toFixed(2)
+            if (b > 0 && b < 18) {
+                setResult(b)
+                setStatus('Under Weight')
+                setShowResult(true)
+            }
+            if (b > 18 && b < 24.9) {
+                setResult(b)
+                setStatus('Normal Weight')
+                setShowResult(true)
+            }
+            if (b > 25) {
+                setResult(b)
+                setStatus('Over Weight')
+                setShowResult(true)
+            }
 
         }
     }
@@ -78,7 +82,7 @@ const DietPlansDetails = ({ navigation, route }) => {
                                 - <LanguageText styles={styles.innerHeading} value={'normalWeight'} /> = 18.5 - 24.9
                             </Text>
                             <Text style={styles.innerHeading}>
-                                - <LanguageText styles={styles.innerHeading} value={'overWeight'} /> = Greater then 30
+                                - <LanguageText styles={styles.innerHeading} value={'overWeight'} /> = Greater then 25
                             </Text>
                         </View>
                     </View>
@@ -118,15 +122,26 @@ const DietPlansDetails = ({ navigation, route }) => {
                             <View style={styles.resultView}>
                                 <LanguageText styles={styles.textStyles} value={'yourBmiIs'} />
                                 <Text style={[styles.textStyles, { paddingHorizontal: 5, color: Colors.primary }]}>
-                                    {result}
+                                    {result} {showResult ? `(${status})` : ''}
                                 </Text>
                             </View>
                         </Card>
 
                     </View>
-                    <View style={styles.BmiNoteView}>
-                        <LanguageText styles={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]} value={'bmiNote'} />
-                    </View>
+                    {
+                        showResult ?
+                            (
+                                <View style={styles.BmiNoteView}>
+                                    <Text style={[styles.textStyles, { color: Colors.primary, fontSize: 22, textAlign: 'justify' }]}>
+                                        The system suggests you to follow diet plan for {status}
+                                    </Text>
+                                </View>
+                            )
+                            :
+                            <View>
+
+                            </View>
+                    }
                 </KeyboardAvoidingView>
             </ScrollView>
         )
@@ -228,7 +243,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     BmiNoteView: {
-        width: '90%',
+        width: '85%',
         paddingTop: 15
     },
     upperScreen: {

@@ -12,7 +12,7 @@ const LanguageText = (props) => {
 
     useEffect(async () => {
         await getData();
-        if (props.screen==='WI') {
+        if (props.screen === 'WI') {
             await setSteps([...i18n.t(props.value).split('*')])
         }
 
@@ -47,7 +47,7 @@ const LanguageText = (props) => {
     return (
         <>
             {
-                steps.map((item,i) => (
+                steps.map((item, i) => (
                     <Text style={props.styles} key={i}>{item}</Text>
                 ))
             }

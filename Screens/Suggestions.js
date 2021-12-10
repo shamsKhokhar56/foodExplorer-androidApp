@@ -11,8 +11,9 @@ import Card from '../components/Card';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
+
 const Suggestions = ({ navigation, route }) => {
-	const [cityName, setCityName] = useState('Islamabad')
+	const [cityName, setCityName] = useState('Faisalabad')
 	const [resData, setResData] = useState();
 	const [location, setLocation] = useState(false)
 	const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ const Suggestions = ({ navigation, route }) => {
 	}
 	useEffect(() => {
 		getData();
-	}, [location]);
+	}, [location, cityName]);
 	const cities = [
 		{
 			code: '1',
@@ -56,6 +57,7 @@ const Suggestions = ({ navigation, route }) => {
 			city: 'Rawalpindi'
 		},
 	];
+	
 	const handleCityChange = (cityName) => {
 		setLocation(false)
 		setCityName(cityName)
