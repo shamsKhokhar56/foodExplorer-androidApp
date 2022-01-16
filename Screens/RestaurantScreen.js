@@ -182,6 +182,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    searchCard: {
+        width: '100%',
+        height: '75%',
+        flexDirection: 'row'
+    },
+    searchIcon: {
+        height: '100%',
+        width: '15%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    searchInput: {
+        width: '70%',
+        height: '100%',
+        justifyContent: 'center',
+    },
     upperDashboard: {
         height: '10%',
         justifyContent: 'center',
@@ -206,22 +222,6 @@ const styles = StyleSheet.create({
     locationTextStyles: {
         color: 'black',
         fontSize: 20
-    },
-    searchCard: {
-        width: '100%',
-        height: '75%',
-        flexDirection: 'row'
-    },
-    searchIcon: {
-        height: '100%',
-        width: '15%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    searchInput: {
-        width: '70%',
-        height: '100%',
-        justifyContent: 'center',
     },
     crossIcon: {
         height: '100%',

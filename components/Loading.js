@@ -3,10 +3,10 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/Colors';
 import LanguageText from './LanguageText';
 
-const Loading = () => {
+const Loading = (props) => {
     return (
         <View style={styles.screen}>
-            <ActivityIndicator size="large" color={Colors.primary} />
+            <ActivityIndicator size="large" color={props.color ? props.color : Colors.primary} />
         </View>
     )
 }

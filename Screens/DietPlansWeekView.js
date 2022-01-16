@@ -1,9 +1,8 @@
 import React from 'react'
-import {View, StyleSheet, TouchableHighlight, ImageBackground, FlatList, Text } from 'react-native';
+import { View, StyleSheet, TouchableHighlight, ImageBackground, FlatList, Text } from 'react-native';
 import Colors from '../constants/Colors'
 import Card from '../components/Card'
 
-import LanguageText from '../components/LanguageText';
 import weekdays from '../data/WeeklyDietPlansDetails';
 
 const DietPlansWeekView = ({ navigation, route }) => {
@@ -31,9 +30,7 @@ const DietPlansWeekView = ({ navigation, route }) => {
                                     })
                                 }
                                 }>
-                                <ImageBackground style={styles.imageStyle} source={item.image}>
-                                    {/* <LanguageText styles={styles.innerTextStyles} value={`${item.dayName}`} /> */}
-                                </ImageBackground>
+                                <ImageBackground style={styles.imageStyle} source={item.image} />
                             </TouchableHighlight>
                         </Card>
                     )
@@ -42,8 +39,6 @@ const DietPlansWeekView = ({ navigation, route }) => {
         </View>
     )
 }
-
-export default DietPlansWeekView;
 
 const styles = StyleSheet.create({
     screen: {
@@ -84,4 +79,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
 })
+
+export default DietPlansWeekView;
 

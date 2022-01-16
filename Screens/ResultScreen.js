@@ -8,6 +8,7 @@ const ResultScreen = ({ route }) => {
     const [data, setData] = useState([route.params.data])
     const name = data[0].predicted_class
     const score = data[0].score
+    console.log(score)
 
     const [foodItems, setFoodItems] = useState();
     const [loading, setLoading] = useState(true);
@@ -34,10 +35,11 @@ const ResultScreen = ({ route }) => {
                 ) : (
                     <View style={styles.foodScreen}>
                         {
-                            score == '0.0' ? (
-                                <View style={{ height:'100%', justifyContent: 'center', alignItems: 'center' }}>
+                            score < '70' || score == 'undefined' ? (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 24, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>
                                         Image not identified or Object not found.
+                                        {score}
                                     </Text>
                                 </View>
 

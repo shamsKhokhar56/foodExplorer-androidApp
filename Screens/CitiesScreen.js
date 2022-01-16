@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, FlatList, ImageBackground, TouchableHighlight } from 'react-native'
 
-import Colors from '../constants/Colors'
 import Card from '../components/Card'
 import Cities from '../data/CitiesData'
 
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
     headingText: {
         fontSize: 32,
         color: 'black',
-        // textAlign: 'center',
         fontWeight: 'bold'
     },
     cardView: {

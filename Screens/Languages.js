@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../constants/Colors';
 import LanguageText from '../components/LanguageText';
 
-const Languages = ({ navigation }) => {
+const Languages = () => {
     const { context, setContext } = useContext(LanguageContext)
     const Languages = [
         {

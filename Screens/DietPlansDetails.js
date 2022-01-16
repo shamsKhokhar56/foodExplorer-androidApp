@@ -8,12 +8,9 @@ import Colors from '../constants/Colors';
 
 import DietPlansData from '../data/DietPlansData';
 
-import firebase from '../Firebase/fire';
-
 const DietPlansDetails = ({ navigation, route }) => {
 
     const id = route.params.id
-    // const bmi = route.params.bmi
 
     var name = ''
 
@@ -30,14 +27,6 @@ const DietPlansDetails = ({ navigation, route }) => {
     const [result, setResult] = useState('')
     const [status, setStatus] = useState('')
     const [showResult, setShowResult] = useState(false)
-
-    // const storeBmi = async (value) => {
-    //     const uid = await firebase.auth().currentUser.uid
-    //     await firebase.firestore().collection('User').doc(uid)
-    //         .update({
-    //             bmi: value
-    //         })
-    // }
 
     const CalculateBMI = () => {
         Keyboard.dismiss()
@@ -196,12 +185,10 @@ const styles = StyleSheet.create({
         textAlign: 'justify'
     },
     BmiCalculatorView: {
-        // height: '40%',
         width: '90%'
     },
     cardStyles: {
         padding: 20,
-        // height: '100%',
         width: '100%'
     },
     BMIView: {
@@ -226,7 +213,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     calculateButton: {
-        // height: '100%',
         height: 50,
         backgroundColor: Colors.primary,
         justifyContent: 'center',
@@ -289,4 +275,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default DietPlansDetails
+export default DietPlansDetails;

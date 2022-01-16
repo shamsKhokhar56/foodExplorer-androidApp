@@ -12,11 +12,7 @@ import RestaurantScreen from '../Screens/RestaurantScreen';
 import WorkoutMain from '../Screens/WorkoutMain';
 import WorkoutTypes from '../Screens/WorkoutTypes';
 
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { AntDesign, Entypo, SimpleLineIcons, Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import WorkoutDetail from '../Screens/WorkoutDetail';
@@ -455,7 +451,7 @@ function LanguageScreenStack({ navigation }) {
                 name="Language"
                 component={Languages}
                 options={{
-                    title: 'Select Languages',
+                    title: 'Select Language',
                     headerLeft: () => (
                         <Ionicons name="arrow-back" size={40} color="white"
                             style={{ margin: 10 }} onPress={() => navigation.goBack()}
@@ -476,16 +472,14 @@ function LanguageScreenStack({ navigation }) {
 
 
 
-const DrawerNavigator = ({ route }) => {
-    const userEmail = ""
-    // const userEmail = route.params.email
+const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
             drawerContentOptions={{
                 activeTintColor: Colors.primary,
                 itemStyle: { marginVertical: 3 },
             }}
-            drawerContent={(props) => <CustomSidebarMenu userEmail={userEmail} {...props} />}
+            drawerContent={(props) => <CustomSidebarMenu {...props} />}
         >
             <Drawer.Screen
                 name="Dashbaord"
@@ -497,6 +491,17 @@ const DrawerNavigator = ({ route }) => {
                         <Ionicons
                             name='md-home-outline' size={24} color={Colors.primary}
                         />
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="Profile"
+                options={{ drawerLabel: 'Profile' }}
+                component={ProfileScreenStack}
+                options={{
+                    title: 'Profile',
+                    drawerIcon: () => (
+                        <FontAwesome5 name="user" size={24} color={Colors.primary} />
                     )
                 }}
             />
@@ -516,20 +521,9 @@ const DrawerNavigator = ({ route }) => {
                 options={{ drawerLabel: 'Select Language' }}
                 component={LanguageScreenStack}
                 options={{
-                    title: 'Select Languages',
+                    title: 'Select Language',
                     drawerIcon: () => (
                         <FontAwesome name="language" size={24} color={Colors.primary} />
-                    )
-                }}
-            />
-            <Drawer.Screen
-                name="Profile"
-                options={{ drawerLabel: 'Profile' }}
-                component={ProfileScreenStack}
-                options={{
-                    title: 'Profile',
-                    drawerIcon: () => (
-                        <FontAwesome5 name="user" size={24} color={Colors.primary} />
                     )
                 }}
             />

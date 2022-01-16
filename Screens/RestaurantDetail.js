@@ -32,8 +32,6 @@ const RestaurantDetail = ({ navigation, route }) => {
 
 	const restId = route.params.restId
 	const name = route.params.name
-	const linkNumber = route.params.linkNumber
-	const cityCode = route.params.cityCode
 	const rating = route.params.rating
 	const openTime = route.params.openTime
 	const closeTime = route.params.closeTime
@@ -44,15 +42,15 @@ const RestaurantDetail = ({ navigation, route }) => {
 	const city = route.params.city
 
 	const getData = async () => {
-	    const ref = firebase.firestore().collection(`Food${city}`)
-	    await ref.get().then((item) => {
-	        const items = item.docs.map((doc) => doc.data());
-	        setFoodData(items);
-	        setLoading(false);
-	    })
+		const ref = firebase.firestore().collection(`Food${city}`)
+		await ref.get().then((item) => {
+			const items = item.docs.map((doc) => doc.data());
+			setFoodData(items);
+			setLoading(false);
+		})
 	}
 	useEffect(() => {
-	    getData();
+		getData();
 	}, [review]);
 
 
@@ -87,16 +85,6 @@ const RestaurantDetail = ({ navigation, route }) => {
 	const postHandler = async () => {
 
 		const userName = await firebase.auth().currentUser.displayName
-		const data = {
-			city: city,
-			cityCode: restId.slice(0, 1),
-			linkNumber: restId.substring(1),
-			restaurantId: restId,
-			reviewAt: getDate(),
-			reviewBy: userName,
-			reviewDescription: review,
-			reviewRating: `${defaultRating}/5 Stars`
-		}
 		const ref = firebase.firestore().collection(`Review${city}`).doc()
 		const id = ref.id
 		return (
@@ -112,30 +100,37 @@ const RestaurantDetail = ({ navigation, route }) => {
 				reviewRating: `${defaultRating}/5 Stars`
 			})
 				.then(() => Alert.alert('Review posted', 'Review has been posted succesfully'))
+				.then(() => setPostReview(false))
 		)
 	}
 
 	return (
 		<ScrollView style={styles.screen} keyboardShouldPersistTaps={'always'}>
-			<View style={styles.searchView}>
-				<Card style={styles.searchCard}>
-					<View style={styles.searchIcon}>
-						<FontAwesome name="search" size={30} color={Colors.primary} />
+			{
+				food ? (
+					<View style={styles.searchView}>
+						<Card style={styles.searchCard}>
+							<View style={styles.searchIcon}>
+								<FontAwesome name="search" size={30} color={Colors.primary} />
+							</View>
+							<View style={styles.searchInput}>
+								<TextInput
+									placeholder='Search Food'
+									onChangeText={text => { setSearch(text) }}
+									value={search}
+								/>
+							</View>
+							<View style={styles.crossIcon}>
+								<TouchableHighlight underlayColor="none" onPress={() => setSearch('')}>
+									<Entypo name="cross" size={18} color={"#A3A8AE"} />
+								</TouchableHighlight>
+							</View>
+						</Card>
 					</View>
-					<View style={styles.searchInput}>
-						<TextInput
-							placeholder='Search Food'
-							onChangeText={text => { setSearch(text) }}
-							value={search}
-						/>
-					</View>
-					<View style={styles.crossIcon}>
-						<TouchableHighlight underlayColor="none" onPress={() => setSearch('')}>
-							<Entypo name="cross" size={18} color={"#A3A8AE"} />
-						</TouchableHighlight>
-					</View>
-				</Card>
-			</View>
+				) : (
+					<></>
+				)
+			}
 			<Image style={styles.imageStyles} source={{ uri: image }} />
 			<View style={styles.restaurantDetails}>
 				<Text style={styles.textStyles}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableHighlight, ScrollView, Text } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -13,7 +13,7 @@ const Dashboard = ({ navigation }) => {
         <View style={styles.screen}>
             <View style={styles.dashboardItems}>
                 <ScrollView style={styles.scrollViewStyles}>
-                    <View style={styles.dashboardItemsViewLower}>
+                    <View style={styles.dashboardItemsView}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('RestaurantScreen',
                                 { city: 'Islamabad' }
@@ -24,7 +24,7 @@ const Dashboard = ({ navigation }) => {
                             </TouchableHighlight>
                         </Card>
                     </View>
-                    <View style={styles.dashboardItemsViewLower}>
+                    <View style={styles.dashboardItemsView}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('CitiesScreen')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/cities.jpeg')}>
@@ -33,7 +33,7 @@ const Dashboard = ({ navigation }) => {
                             </TouchableHighlight>
                         </Card>
                     </View>
-                    <View style={styles.dashboardItemsViewLower}>
+                    <View style={styles.dashboardItemsView}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('WorkoutMain')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/workout.jpg')}>
@@ -42,7 +42,7 @@ const Dashboard = ({ navigation }) => {
                             </TouchableHighlight>
                         </Card>
                     </View>
-                    <View style={styles.dashboardItemsViewLower}>
+                    <View style={styles.dashboardItemsView}>
                         <Card style={styles.lowerCard}>
                             <TouchableHighlight onPress={() => navigation.navigate('DietPlans')}>
                                 <ImageBackground style={styles.imageStyle} source={require('../assets/dietPlan.jpg')}>
@@ -71,8 +71,27 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.backgroundGrey,
     },
+    dashboardItems: {
+        height: '94%',
+        justifyContent: 'center',
+        paddingBottom: 20,
+    },
     scrollViewStyles: {
         padding: 10
+    },
+    dashboardItemsView: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 200,
+    },
+    lowerCard: {
+        width: '95%',
+        height: '90%',
+        overflow: 'hidden'
+    },
+    imageStyle: {
+        width: '100%',
+        height: '100%',
     },
     textStyles: {
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -83,44 +102,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         padding: 15
     },
-    dashboardItems: {
-        height: '94%',
-        justifyContent: 'center',
-        paddingBottom: 20,
-    },
-    dashboardItemsViewUpper: {
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-        height: 200,
-        width: '100%',
-        margin: 1
-    },
-    upperCard: {
-        width: '42%',
-        height: '85%',
-        overflow: 'hidden'
-    },
-    imageStyle: {
-        width: '100%',
-        height: '100%',
-    },
-    dashboardItemsViewLower: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 200,
-    },
-    lowerCard: {
-        width: '95%',
-        height: '90%',
-        overflow: 'hidden'
-    },
     bottom: {
-        height: '6%',
+        height: '7%',
         backgroundColor: Colors.primary,
-        justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: 10
+        justifyContent: 'center',
+        paddingBottom: 40
     },
     cameraButtonView: {
         alignItems: 'center',

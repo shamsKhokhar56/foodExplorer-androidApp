@@ -2,16 +2,12 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Alert, LogBox } from 'react-native';
-
 import firebase from './Firebase/fire';
 import Login from './Screens/Login';
 import Signup from './Screens/Signup';
 import DrawerNavigator from './navigator/MainNavigator';
 import { LanguageContext } from './LanguageContext';
 import { NotificationsContext } from './NotificationsProvider';
-import App from './services/NotificationServices';
-import AsyncStorageHelper from './Helpers/AsyncStorage';
 
 const Stack = createStackNavigator();
 

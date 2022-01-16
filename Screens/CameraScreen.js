@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
+
+import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 import { Camera } from 'expo-camera';
-import { Entypo, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
+
+import { manipulateAsync } from 'expo-image-manipulator';
 
 import LanguageText from '../components/LanguageText';
 
 import axios from "axios";
+import Colors from '../constants/Colors';
+import Loading from '../components/Loading';
 
 const CameraScreen = ({ navigation }) => {
     const [cameraRef, setCameraRef] = useState(null);
@@ -20,7 +25,7 @@ const CameraScreen = ({ navigation }) => {
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestPermissionsAsync();
+            const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
@@ -50,6 +55,7 @@ const CameraScreen = ({ navigation }) => {
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
+
         });
 
         console.log(result);
@@ -61,8 +67,16 @@ const CameraScreen = ({ navigation }) => {
 
     const onPictureSaved = async (photo) => {
         console.log(photo.uri)
+        const manipResult = await manipulateAsync(
+            photo.uri,
+            [
+                { resize: { width: 600, height: 400 } },
+            ],
+            { compress: 1 }
+        );
+        photo.uri = manipResult.uri
+        setImageUri(photo.uri);
         setClicked(true)
-        setImageUri(photo.uri)
 
         const formData = new FormData();
         const fileName = photo.uri.split("/");
@@ -80,7 +94,7 @@ const CameraScreen = ({ navigation }) => {
         try {
             const response = await axios.post(
                 // "http://192.168.10.9:5000/:5000/predict/class",
-                "http://192.168.10.15:5000/predict/class",
+                "http://192.168.43.36:5000/predict/class",
                 formData,
                 {
                     headers: {
@@ -90,9 +104,7 @@ const CameraScreen = ({ navigation }) => {
             );
             console.log("Successful response", response.data, "done");
             navigation.navigate('ResultScreen', { data: response.data })
-            // setResponse(response.data)
         } catch (error) {
-            // console.log("Error response", JSON.stringify(error));
             console.log(error)
         } finally {
             setLoading(false)
@@ -106,6 +118,16 @@ const CameraScreen = ({ navigation }) => {
         return <Text>No access to camera</Text>;
     }
 
+    const openUnityApp = async () => {
+        var SendIntentAndroid = require("react-native-send-intent");
+        SendIntentAndroid.openApp("com.SmartConstruction.HomeDecore").then(wasOpened => !!wasOpened ? console.log(wasOpened) : Alert.alert('Failed to Launch Intent'));
+        // const appPackage = 'com.fyp.foodExplorer'
+        // await Linking.sendIntent('com.fyp.foodExplorerAR').then(() => console.log('done'))
+        // .catch(error => console.log(error.message))
+        // await startActivityAsync(ActivityAction.WIFI_SETTINGS);
+        // console.log('bkjbkjbk')
+    }
+
     return (
         <View style={styles.container}>
             {
@@ -113,6 +135,7 @@ const CameraScreen = ({ navigation }) => {
                     <View style={styles.camera}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <LanguageText value={'imageIsProcessing'} />
+                            <Loading />
                         </View>
                     </View>
                 ) : (
@@ -122,20 +145,22 @@ const CameraScreen = ({ navigation }) => {
                         }}>
 
                     </Camera>
-
                 )
             }
             <View style={styles.bottom}>
                 <View style={styles.innerBottom}>
+                    <TouchableHighlight style={styles.imagePickerButton} onPress={() => ImagePickerHandler()}>
+                        <FontAwesome name="photo" size={50} color={Colors.primary} />
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.innerBottom}>
                     <TouchableOpacity onPress={() => takePicture()}>
-                        <Entypo name="circle" size={100} color="white" />
+                        <Entypo name="circle" size={100} color={Colors.primary} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.innerBottom}>
-                    <TouchableHighlight style={styles.imagePickerButton} onPress={() => ImagePickerHandler()}>
-                        <FontAwesome name="photo" size={50} color="white" />
+                    <TouchableHighlight onPress={() => openUnityApp()}>
+                        <Ionicons name="scan-sharp" size={50} color={Colors.primary} />
                     </TouchableHighlight>
                 </View>
             </View>
@@ -158,12 +183,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderTopColor: 'white',
         borderTopWidth: 1
-        // justifyContent: 'space-evenly',
-        // alignItems: 'center',
-        // backgroundColor: 'black',
-        // borderTopColor: 'white',
-        // borderTopWidth: 1,
-        // flexDirection: 'row'
     },
     innerBottom: {
         justifyContent: 'center',
@@ -184,4 +203,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CameraScreen
+export default CameraScreen;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Alert, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
+import React from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
 import Colors from '../constants/Colors';
 

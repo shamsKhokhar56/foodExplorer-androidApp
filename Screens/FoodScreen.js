@@ -91,13 +91,11 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundGrey,
     },
     searchView: {
-        // height: '10%',
         minHeight: '10%',
         alignItems: 'center',
         justifyContent: 'center',
     },
     searchCard: {
-        // height: '60%',
         minHeight: '6%',
         width: '90%',
         borderRadius: 5,
